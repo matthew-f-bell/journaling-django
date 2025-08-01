@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Create Journal Entry | Journaling
+{% endblock %}
+
+{% block body %}
+    <h1>Create Journal Entry:</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <h4>
+            {{form.as_p}}
+        </h4>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
