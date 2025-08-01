@@ -7,5 +7,11 @@
 
 <!-- Body Content -->
  {% block body %}
-        <h1>Welcome, {{ user.username }} to your Profile!</h1>
+        <h1>Welcome, {{ user.username }} to your Journal!</h1>
+        <span><a href="{% url 'journal-entry' %}">New Journal Entry</a></span>
+
+        {% for journal_entry in journal_entries %}
+            <h3>{{journal_entry.title}}</h3>
+            <p>{{journal_entry.journal_content}}</p>
+        {% endfor %}
  {% endblock %}
