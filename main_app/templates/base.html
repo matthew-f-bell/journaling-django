@@ -15,7 +15,7 @@
         <a href="/">Home</a>
         <span>|</span>
         {% if user.is_authenticated %}
-        <span>Hello, <a href="{% url 'user-profile' %}">{{request.user.profile.first_name}}user</a>!</span>
+        <span>Hello, <a href="{% url 'user-profile' user.id %}">{{user.first_name}}</a>!</span>
         <span>|</span>
         <span><a href="">Edit Profile</a></span>
         <span>|</span>

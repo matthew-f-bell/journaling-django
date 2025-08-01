@@ -11,13 +11,14 @@ class Home(TemplateView):
     template_name = 'home.html'
 
 @login_required
-def profile_view(request, username=None):
-    if username:
-        profile = get_object_or_404(CustomUser, username=username).profile
-    else:
-        try:
-            profile = request.user.profile
-        except:
-            return HttpResponseBadRequest("you bad boy, profile is broken and can't get profile info")
+def profile_view(request, user_id):
+    user = CustomUser.objects.get(id=user_id)
+#    if username:
+#        profile = get_object_or_404(CustomUser, username=username).profile
+#    else:
+#        try:
+#            profile = request.user.profile
+#        except:
+#            return HttpResponseBadRequest("you bad boy, profile is broken and can't get profile info")
 #            return redirect('/')
-    return render(request, 'templates/profile.html', {'profile':profile})
+    return render(request, 'profile.html', {'user': user})
