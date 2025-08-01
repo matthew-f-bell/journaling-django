@@ -1,0 +1,36 @@
+{% load allauth account %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <span>|</span>
+        {% if user.is_authenticated %}
+        <span>Hello, <a href="{% url 'user-profile' %}">{{request.user.profile.first_name}}user</a>!</span>
+        <span>|</span>
+        <span><a href="">Edit Profile</a></span>
+        <span>|</span>
+        <span><a href="{% url 'account_logout' %}">Logout</a></span>
+        <span>|</span>
+        {% else %}
+        <span>
+            <a href="{% url 'account_login' %}">Login</a>
+        </span>
+        <span>|</span>
+        <span><a href="{% url 'account_login' %}">Sign-up</a></span>
+        <span>|</span>
+        {% endif %}
+    </nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

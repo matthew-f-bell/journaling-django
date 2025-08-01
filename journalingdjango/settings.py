@@ -27,9 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG") == "True"
+DEBUG = True
+#os.getenv("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -134,6 +135,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom User Model
 AUTH_USER_MODEL = 'main_app.CustomUser'
 
+# Custom Adapter for Getting Data Through Google OAuth 2.0
+SOCIALACCOUNT_ADAPTER = 'main_app.adapters.CustomSocialAccountAdapter'
+
 
 # Specific Authentication Backends
 AUTHENTICATION_BACKENDS = {
@@ -158,6 +162,11 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # Django allauth Configurations
 SITE_ID = 1
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2']
 ACCOUNT_LOGIN_METHODS = {'email'}
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+

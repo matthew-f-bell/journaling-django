@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+<!-- Tab Title -->
+{% block title %}
+    Journal - Home
+{% endblock %}
+
+<!-- Body Content -->
+ {% block body %}
+    {% if user.is_authenticated %}
+        <h1>Welcome, {{ profile.name }} to your home page!</h1>
+    {% else %}
+        <h1>Home Page Is Working!</h1>
+    {% endif %}
+ {% endblock %}
