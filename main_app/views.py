@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
@@ -28,27 +29,41 @@ class Journal_Entry_View(FormView):
     model = JournalEntry
     form_class = JournalEntryCreationForm
     template_name = 'journal_entry_creation.html'
-    success_url = '/'
+#    user = CustomUser.id
+#    success_url = reverse_lazy('user-profile', kwargs={'user_id':user})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
+        user = self.object.user.id
         self.object.save()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user}))
     
 @method_decorator(login_required, name='dispatch')
 class Journal_Update_View(UpdateView):
     model = JournalEntry
     form_class = JournalEntryCreationForm
     template_name = 'journal_entry_creation.html'
+#    user = CustomUser.id
+
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs)
 
-    success_url = '/'
+#    success_url = reverse_lazy('user-profile', kwargs={'user_id':user})
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        user = self.object.user.id
+        self.object.save()
+        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user}))
+
 
 @method_decorator(login_required, name='dispatch')
 class Journal_Delete_View(DeleteView):
     model = JournalEntry
     template_name = 'journal_entry_delete.html'
+#    user = JournalEntry.user
+#    success_url = reverse_lazy('user-profile', kwargs={'user_id':user})
     success_url = '/'

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 <!-- Tab Title -->
 {% block title %}
@@ -6,16 +7,25 @@
 {% endblock %}
 
 <!-- Body Content -->
- {% block body %}
-        <h1>Welcome, {{ user.username }} to your Journal!</h1>
-        <span><a href="{% url 'journal-entry' %}">New Journal Entry</a></span>
-
-        {% for journal_entry in journal_entries %}
-            <h3>{{journal_entry.title}}</h3>
-            <p>{{journal_entry.journal_content}}</p>
-            <div id="journal-crud">
-                <a href="{% url 'journal-update' journal_entry.pk %}">Update</a>
-                <a href="{% url 'journal-delete' journal_entry.pk %}">Delete</a>
+{% block body %}
+    <div class="base-body">
+        <h1 class="profile-page-title">Welcome, {{ user.username }} to your Journal!</h1>
+            <a class="journal-entry-link" href="{% url 'journal-entry' %}">
+                New Journal Entry
+            </a>
+        <div class="timeline-container">
+            {% for journal_entry in journal_entries %}
+            <div class="journal-entry-container">
+                <h3 class="journal-entry-title">{{journal_entry.title}}</h3>
+                <p>{{journal_entry.journal_content}}</p>
+                <span>{{journal_entry.date_created}}</span>
+                <span>{{journal_entry.user.first_name}}</span>
+                <div id="journal-crud">
+                    <a class="journal-crud-link" href="{% url 'journal-update' journal_entry.pk %}">Update</a>
+                    <a class="journal-crud-link" href="{% url 'journal-delete' journal_entry.pk %}">Delete</a>
+                </div>
             </div>
-        {% endfor %}
- {% endblock %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
