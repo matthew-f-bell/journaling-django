@@ -95,6 +95,10 @@ h4 {
     margin: 5px;
 }
 
+.journal-entry-title {
+    border-bottom: 2px solid #5496ba;
+}
+
 #journal-crud {
     display: inline;
     float: right;
@@ -117,13 +121,31 @@ h4 {
 }
 
 /* Journal Creation Styles */
-.journal-entry-title {
-    border-bottom: 2px solid #5496ba;
+.create-journal-page {
+    display: block;
+    margin-top: 48px;
+}
+
+.journal-input-title {
+    margin-bottom: 0;
 }
 
 .journal-input-entry {
+    margin-bottom: 0;
     min-width: 10%;
     max-width: 50%;
     height: fit-content;
     width: fit-content;
+}
+
+.journal-form-btn {
+    padding: 2px 5px;
+    background-color: #24739e;
+    border: 1px solid #015582;
+    border-radius: 5px;
+    color: white;
+}
+
+.journal-form-btn:hover {
+    background-color: #5496ba;
 }
