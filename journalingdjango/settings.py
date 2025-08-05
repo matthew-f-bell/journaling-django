@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'journalingdjango.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.getenv("DJANGO_DATABASE_URL"),
-        'NAME': 'journaling',
+        'NAME': os.getenv("DJANGO_DATABASE_NAME"),
     }
 }
 
