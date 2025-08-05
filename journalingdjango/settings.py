@@ -44,7 +44,7 @@ else:
 #DEBUG = True
 #os.getenv("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://better-days-coming.onrender.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'better-days-coming.onrender.com', 'https://better-days-coming.onrender.com/']
 
 
 # Application definition
