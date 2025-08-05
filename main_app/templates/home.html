@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 <!-- Tab Title -->
 {% block title %}
@@ -8,8 +10,13 @@
 <!-- Body Content -->
  {% block body %}
     {% if user.is_authenticated %}
+    <div class="base-body">
         <h1>Welcome, {{ user.first_name }} to your home page!</h1>
+    </div>
     {% else %}
-        <h1>Home Page Is Working!</h1>
+    <div class="base-body">
+        <h1>Welcome to</br>Better Days Coming!</h1>
+        <div>Please Login or Sign-up!</div>
+    </div>
     {% endif %}
  {% endblock %}

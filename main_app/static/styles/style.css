@@ -1,0 +1,151 @@
+/* Navbar */
+nav {
+    top: 0;
+    left: 0;
+}
+
+ul {
+    top: 0;
+    left: 0;
+    background-color: #015582;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#home-btn {
+    border-right: none;
+}
+
+li {
+    float: left;
+    background-color: #015582;
+    border-right: 1px solid white;
+}
+
+
+
+li a:hover {
+    background-color: #5496ba;
+}
+
+.nav-link {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    color: white;
+}
+
+/* General Header Styling */
+h3 {
+    margin-top: 0;
+}
+
+h4 {
+    width: fit-content;
+    height: fit-content;
+    margin-top: 0;
+}
+
+/* Create New Journal Link Button */
+.journal-entry-link-container {
+    border: 3px solid red;
+}
+
+.journal-entry-link:hover {
+    background-color: #5496ba;
+}
+
+.journal-entry-link {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #24739e;
+    border: 1px solid #015582;
+    border-radius: 10px;
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* General Body Styling */
+.base-body {
+    display: inline-block;
+    margin-top: 38px;
+    vertical-align: middle;
+}
+
+/* Journal Timeline */
+.timeline-container {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+    max-width: 50%;
+    min-width: 20%;
+}
+
+.journal-entry-container {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.journal-entry-title {
+    border-bottom: 2px solid #5496ba;
+}
+
+#journal-crud {
+    display: inline;
+    float: right;
+}
+
+.journal-crud-link {
+    margin: 5px;
+    padding: 2px 5px;
+    background-color: #24739e;
+    border: 1px solid #015582;
+    border-radius: 5px;
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.journal-crud-link:hover {
+    background-color: #5496ba;
+}
+
+/* Journal Creation Styles */
+.create-journal-page {
+    display: block;
+    margin-top: 48px;
+}
+
+.journal-input-title {
+    margin-bottom: 0;
+}
+
+.journal-input-entry {
+    margin-bottom: 0;
+    min-width: 10%;
+    max-width: 50%;
+    height: fit-content;
+    width: fit-content;
+}
+
+.journal-form-btn {
+    padding: 2px 5px;
+    background-color: #24739e;
+    border: 1px solid #015582;
+    border-radius: 5px;
+    color: white;
+}
+
+.journal-form-btn:hover {
+    background-color: #5496ba;
+}

@@ -8,7 +8,7 @@ class JournalEntryCreationForm(forms.ModelForm):
     current_date = get_datetime.date()
 
     title = forms.CharField(max_length=100, initial=current_date)
-    journal_content = forms.CharField(max_length=100000)
+    journal_content = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = JournalEntry

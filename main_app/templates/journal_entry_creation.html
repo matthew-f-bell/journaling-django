@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block title %}
     Create Journal Entry | Journaling
 {% endblock %}
 
 {% block body %}
+<div class="create-journal-page">
     <h1>Create Journal Entry:</h1>
 
     <form method="post">
         {% csrf_token %}
-        <h4>
-            {{form.as_p}}
-        </h4>
-        <input type="submit" value="Submit">
+        <div>
+            <div class="journal-input-container"><h4 class="journal-input-title">Title:</h4>{{ form.title }}</div>
+            <br/>
+            <div class="journal-input-container"><h4 class="journal-input-entry">Journal Entry:</h4>{{ form.journal_content }}</div>
+        </div>
+        <input class="journal-form-btn" type="submit" value="Submit">
     </form>
+</div>
 {% endblock %}
