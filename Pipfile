@@ -13,6 +13,7 @@ dotenv = "*"
 dj-database-url = "*"
 requests = "*"
 pyjwt = "*"
+cryptography = "*"
 
 [dev-packages]
 
