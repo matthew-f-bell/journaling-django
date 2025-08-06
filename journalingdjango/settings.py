@@ -37,8 +37,12 @@ else:
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
     DEBUG = False
+    STATIC_URL = 'https://better-days-coming.onrender.com/'
+
 else:
-    DEBUG = False
+    DEBUG = True
+    STATIC_URL = '/static/'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -149,7 +153,6 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
-STATIC_URL = '/static/'
 
 STORAGES = {
         "staticfiles": {
