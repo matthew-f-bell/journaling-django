@@ -30,10 +30,14 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
     STATIC_URL = '/static'
+    STATIC_ROOT = '/opt/render/project/src/journalingdjango/static'
+
 
 else:
     DEBUG = True
     STATIC_URL = '/static/'
+    PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 # Production Whitenoise Mime Types
 WHITENOISE_MIMETYPES = {
@@ -144,11 +148,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-# Set Deployment Static Root
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 
 STORAGES = {
