@@ -10,6 +10,7 @@ import os
 import socket
 import psycopg2
 import dj_database_url
+import mimetypes
 
 
 load_dotenv()
@@ -33,6 +34,10 @@ if os.getenv("DJANGO_HOST") == "production":
 else:
     DEBUG = True
     STATIC_URL = '/static/'
+
+# Production Mime Files
+mimetypes.add_type("text/css", ".css", True)
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
