@@ -35,9 +35,10 @@ else:
     DEBUG = True
     STATIC_URL = '/static/'
 
-# Production Mime Files
-mimetypes.add_type("text/css", ".css", True)
-
+# Production Whitenoise Mime Types
+WHITENOISE_MIMETYPES = {
+    '.xsl': 'application/xml'
+}
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
