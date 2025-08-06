@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # Define general behavior variables for DJANGO_HOST and all others
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
-    STATIC_URL = '/static/'
+    STATIC_URL = 'https://better-days-coming.onrender.com/'
 
 else:
     DEBUG = True
