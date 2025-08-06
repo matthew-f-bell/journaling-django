@@ -1,3 +1,13 @@
+h3 {
+    margin-top: 0;
+}
+
+h4 {
+    width: fit-content;
+    height: fit-content;
+    margin-top: 0;
+}
+
 /* Navbar */
 nav {
     top: 0;
@@ -38,16 +48,7 @@ li a:hover {
     color: white;
 }
 
-/* General Header Styling */
-h3 {
-    margin-top: 0;
-}
 
-h4 {
-    width: fit-content;
-    height: fit-content;
-    margin-top: 0;
-}
 
 /* Create New Journal Link Button */
 .journal-entry-link-container {
