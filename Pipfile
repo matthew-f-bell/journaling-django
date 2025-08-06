@@ -12,7 +12,6 @@ whitenoise = "*"
 dotenv = "*"
 dj-database-url = "*"
 requests = "*"
-jwt = "*"
 pyjwt = "*"
 
 [dev-packages]
