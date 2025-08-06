@@ -14,9 +14,6 @@ import dj_database_url
 
 load_dotenv()
 
-DATABASE_URL = os.environ['DJANGO_DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -105,10 +102,12 @@ DATABASES = {
     'default': {
         'ENGINE': os.getenv("DJANGO_DATABASE_URL"),
         'NAME': os.getenv("DJANGO_DATABASE_NAME"),
+        'USER': os.getenv("DJANGO_DATABASE_USER"),
+        'PASSWORD':os.getenv("DJANGO_DATABASE_PASSWORD"),
+        'HOST': os.getenv("DJANGO_DATABASE_HOST"),
     }
 }
 
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation
