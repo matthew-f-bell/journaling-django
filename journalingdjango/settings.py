@@ -179,6 +179,11 @@ AUTHENTICATION_BACKENDS = {
     'allauth.account.auth_backends.AuthenticationBackend',
 }
 
+# Social Account Connections
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'GOOGLE_CLIENT_ID'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'GOOGLE_SECRET'
+
+
 
 # Google OAuth Provider Settings
 SOCIALACCOUNT_PROVIDERS = {
