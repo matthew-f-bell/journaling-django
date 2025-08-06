@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
     STATIC_URL = '/static'
-    STATIC_ROOT = '/opt/render/project/src/journalingdjango/static'
+    STATIC_ROOT = '/opt/render/project/src/journalingdjango'
 
 
 else:
