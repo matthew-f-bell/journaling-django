@@ -37,7 +37,8 @@ else:
 
 # Production Whitenoise Mime Types
 WHITENOISE_MIMETYPES = {
-    '.xsl': 'application/xml'
+    '.xsl': 'application/xml',
+    '.css': 'text/css',
 }
 
 
@@ -148,7 +149,7 @@ USE_TZ = True
 # Set Deployment Static Root
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'static/'
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
