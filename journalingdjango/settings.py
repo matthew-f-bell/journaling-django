@@ -29,8 +29,8 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # Define general behavior variables for DJANGO_HOST and all others
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
-    STATIC_URL = '/static'
-    STATIC_ROOT = '/opt/render/project/src/journalingdjango'
+    STATIC_URL = '/opt/render/project/src/journalingdjango/static'
+    STATIC_ROOT = '/opt/render/project/src/journalingdjango/static'
 
 
 else:
