@@ -5,9 +5,9 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic import FormView
 from django.views.generic.edit import UpdateView, DeleteView
-from .models import CustomUser, JournalEntry
+from .models import CustomUser, JournalEntry, DailyGoals
 from django.http import HttpResponseRedirect
-from .forms import JournalEntryCreationForm
+from .forms import JournalEntryCreationForm, DailyGoalCreationForm
 
 
 
@@ -24,13 +24,12 @@ def profile_view(request, user_id):
 
     return render(request, 'profile.html', {'user': user, 'journal_entries':journal_entries})
 
+# Journal CRUD Views
 @method_decorator(login_required, name='dispatch')
 class Journal_Entry_View(FormView):
     model = JournalEntry
     form_class = JournalEntryCreationForm
     template_name = 'journal_entry_creation.html'
-#    user = CustomUser.id
-#    success_url = reverse_lazy('user-profile', kwargs={'user_id':user})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -44,13 +43,9 @@ class Journal_Update_View(UpdateView):
     model = JournalEntry
     form_class = JournalEntryCreationForm
     template_name = 'journal_entry_creation.html'
-#    user = CustomUser.id
-
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs)
-
-#    success_url = reverse_lazy('user-profile', kwargs={'user_id':user})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -67,3 +62,17 @@ class Journal_Delete_View(DeleteView):
 #    user = JournalEntry.user
 #    success_url = reverse_lazy('user-profile', kwargs={'user_id':user})
     success_url = '/'
+
+# Daily Goals Crud
+@method_decorator(login_required, name='dispatch')
+class Daily_Goals_Create_View(FormView):
+    model = DailyGoals
+    form_class = DailyGoalCreationForm
+    template_name = 'daily_goals_creation.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        user = self.object.user.id
+        self.object.save()
+        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user}))
