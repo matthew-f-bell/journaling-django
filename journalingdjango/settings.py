@@ -147,8 +147,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 # Set Deployment Static Root
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 STATIC_ROOT = BASE_DIR / 'static/'
 
 STATICFILES_FINDERS = [
