@@ -30,7 +30,8 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
     STATIC_URL = '/opt/render/project/src/main_app/static'
-    STATIC_ROOT = '/opt/render/project/src/main_app/static'
+    PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 
 else:
