@@ -27,5 +27,20 @@
             </div>
             {% endfor %}
         </div>
+        <div class="daily-goals-widget">
+            <h4 class="daily-goals-link-container">
+                <a href="{% url 'daily-goals-checklist' user.id %}" class="daily-goals-link">Daily Goals</a>
+            </h4>
+                {% for daily_goal in daily_goals %}
+                <div class="daily-goal-item">
+                    {{daily_goal.title}}: {{ daily_goal.consecutive_submissions }} Days in a Row
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
+
+<!-- 
+Pho Red Bo - for food & Da Vien for coffee
+Blow dry, straight iron, clip, and pull outward 
+-->

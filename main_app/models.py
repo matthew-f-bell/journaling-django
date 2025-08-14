@@ -38,7 +38,7 @@ class DailyGoals(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     goal_completed = models.BooleanField(null=True, blank=True)
-    consecutive_submissions = models.IntegerField()
+    consecutive_submissions = models.IntegerField(default=0)
     date_submitted = models.DateField(default=timezone.now)
 
     def __str__(self):

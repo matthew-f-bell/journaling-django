@@ -1,3 +1,8 @@
+#body-fit {
+    display: inline-block;
+    margin-top: 38px;
+}
+
 h3 {
     margin-top: 0;
 }
@@ -74,7 +79,6 @@ li a:hover {
 /* General Body Styling */
 .base-body {
     display: inline-block;
-    margin-top: 38px;
     vertical-align: middle;
 }
 
@@ -124,7 +128,6 @@ li a:hover {
 /* Journal Creation Styles */
 .create-journal-page {
     display: block;
-    margin-top: 48px;
 }
 
 .journal-input-title {
@@ -149,4 +152,27 @@ li a:hover {
 
 .journal-form-btn:hover {
     background-color: #5496ba;
+}
+
+/* Daily Goals Styling */
+.daily-goals-widget {
+    float: right;
+    width: fit-content;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.daily-goals-link-container {
+    margin-bottom: 0;
+    border-bottom: 2px solid #5496ba;
+}
+
+.daily-goals-link {
+    text-decoration: none;
+}
+
+.daily-goal-item {
+    margin-top: 0;
 }
