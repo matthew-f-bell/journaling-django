@@ -15,7 +15,10 @@
         {% else %} 
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% for item in form %}
+                    {{ item }}
+                    <a href="">Delete</a>
+                {% endfor %}
                 <input type="submit">
             </form>
        {% endif %}

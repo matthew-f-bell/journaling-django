@@ -117,20 +117,29 @@ class Daily_Goals_Checklist_View(FormView):
         print(update_goals_id)
         get_datetime = timezone.now()
         get_date = get_datetime.date()
+        print("get_date = " + str(get_date))
         for goal in update_goals_id:
             goal_edit = DailyGoals.objects.get(id=goal)
-            print(goal_edit)
-            if ((goal_edit.date_submitted + timedelta(days=1)) == get_date):
+            date_check = goal_edit.date_submitted
+            next_day = date_check + timedelta(days=1)
+            print(str(next_day))
+            print("difference of dates = " + str(next_day-get_date))
+
+            if (next_day-get_date == timedelta(days=0)):
+                print(str(date_check))
                 submission_increase = goal_edit.consecutive_submissions
                 goal_edit.consecutive_submissions = submission_increase + 1
                 goal_edit.date_submitted = get_date
                 print("consecutive " + goal)
                 goal_edit.save()
-            else:
+            elif(next_day-get_date > timedelta(days=1)):
+                print(str(date_check))
                 goal_edit.consecutive_submissions = 1
                 goal_edit.date_submitted = get_date
                 print("non-consecutive " + goal)
                 goal_edit.save()
+            else:
+                print("Did nothing for " + goal)
         return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
     
     def get_success_url(self):
