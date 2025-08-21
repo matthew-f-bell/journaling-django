@@ -10,21 +10,13 @@
         <div class="create-daily-goal-link-container">
             <a href="{% url 'daily-goals-create' %}" class="create-daily-goal-link">Create New Daily Goal</a>
         </div>
-        {% if daily_goals is None %}
+        {% if form is None %}
             <h3>Please Create a Daily Goal</h3>
         {% else %} 
             <form method="post">
                 {% csrf_token %}
-                {% for daily_goal in daily_goals %}
-                    <div class="goal-checkbox">
-                        <input type="checkbox" name="{{ daily_goal.title }}" value="{{ daily_goal.id }}" class="daily-goal-title">
-                        <span>{{ daily_goal.title }}</span>
-                        <div id="journal-crud">
-                            <a href="{% url 'daily-goals-delete' daily_goal.pk %}" class="journal-crud-link">Delete</a>
-                        </div>
-                    </div>
-                {% endfor %}
-                <input type="submit" value="submit">
+                {{ form.as_p }}
+                <input type="submit">
             </form>
        {% endif %}
     </div>

@@ -22,12 +22,15 @@ class DailyGoalCreationForm(forms.ModelForm):
         fields = ['title']
 
 class DailyGoalsChecklistForm(forms.ModelForm):
-    goal_completed = forms.BooleanField(required=False, initial=False, widget=forms.CheckboxSelectMultiple)
+    completed_daily_goals = forms.ModelMultipleChoiceField(
+        queryset=DailyGoals.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
 
 
     class Meta:
         model = DailyGoals
-        fields = ['title', 'user']
-        widgets = {
-            'title': forms.CheckboxSelectMultiple,
-        }
+        fields = []
+
