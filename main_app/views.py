@@ -82,26 +82,6 @@ class Daily_Goals_Create_View(FormView):
         user = self.object.user.id
         self.object.save()
         return HttpResponseRedirect(reverse_lazy('daily-goals-checklist', kwargs={'user_id':user}))
-    
-@method_decorator(login_required, name='dispatch')
-class Daily_Goals_Completed_View(FormView):
-    model = DailyGoals
-    form_class = DailyGoalsChecklistForm
-
-
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        last_daily_goals = self.objects.filter(pk=pk-1)
-        if (self.object.date_submitted - last_daily_goals.date_submitted) <= 1:
-            self.object.consecutive_submissions =+ 1
-            self.object = form.save(commit=False)
-            self.object.user = self.request.user
-            user_id = self.object.user.id
-            self.object.save()
-            return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
-
 
 @method_decorator(login_required, name='dispatch')
 class Daily_Goals_Checklist_View(FormView):
@@ -118,30 +98,32 @@ class Daily_Goals_Checklist_View(FormView):
         get_datetime = timezone.now()
         get_date = get_datetime.date()
         print("get_date = " + str(get_date))
-        for goal in update_goals_id:
-            goal_edit = DailyGoals.objects.get(id=goal)
-            date_check = goal_edit.date_submitted
-            next_day = date_check + timedelta(days=1)
-            print(str(next_day))
-            print("difference of dates = " + str(next_day-get_date))
-
-            if (next_day-get_date == timedelta(days=0)):
-                print(str(date_check))
-                submission_increase = goal_edit.consecutive_submissions
-                goal_edit.consecutive_submissions = submission_increase + 1
-                goal_edit.date_submitted = get_date
-                print("consecutive " + goal)
-                goal_edit.save()
-            elif(next_day-get_date > timedelta(days=1)):
-                print(str(date_check))
-                goal_edit.consecutive_submissions = 1
-                goal_edit.date_submitted = get_date
-                print("non-consecutive " + goal)
-                goal_edit.save()
-            else:
-                print("Did nothing for " + goal)
-        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
-    
+        if 'save_button' in self.request.POST:
+            for goal in update_goals_id:
+                goal_edit = DailyGoals.objects.get(id=goal)
+                date_check = goal_edit.date_submitted
+                next_day = date_check + timedelta(days=1)
+                print(str(next_day))
+                print("difference of dates = " + str(next_day-get_date))
+                if (next_day-get_date == timedelta(days=0)):
+                    print(str(date_check))
+                    submission_increase = goal_edit.consecutive_submissions
+                    goal_edit.consecutive_submissions = submission_increase + 1
+                    goal_edit.date_submitted = get_date
+                    print("consecutive " + goal)
+                    goal_edit.save()
+                elif(next_day-get_date > timedelta(days=1)):
+                    print(str(date_check))
+                    goal_edit.consecutive_submissions = 1
+                    goal_edit.date_submitted = get_date
+                    print("non-consecutive " + goal)
+                    goal_edit.save()
+                else:
+                    print("Did nothing for " + goal)
+            return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
+        elif 'delete_button' in self.request.POST:
+            DailyGoals.objects.filter(pk__in=update_goals_id).delete()
+            return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse_lazy('user-profile', kwargs={'user_id':user_id})

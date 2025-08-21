@@ -17,9 +17,9 @@
                 {% csrf_token %}
                 {% for item in form %}
                     {{ item }}
-                    <a href="">Delete</a>
                 {% endfor %}
-                <input type="submit">
+                <button type="submit" name="save_button">Submit</button>
+                <button type="submit" name="delete_button">Delete</button>
             </form>
        {% endif %}
     </div>
