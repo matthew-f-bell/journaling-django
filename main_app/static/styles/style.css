@@ -1,6 +1,7 @@
 #body-fit {
-    display: inline-block;
-    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
 }
 
 h3 {
@@ -53,18 +54,22 @@ li a:hover {
     color: white;
 }
 
+/* General Styling */
 
-
-/* Create New Journal Link Button */
-.journal-entry-link-container {
-    border: 3px solid red;
+.base-body {
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.journal-entry-link:hover {
+.btn-container {
+    width: 100%;
+}
+
+.create-btn:hover {
     background-color: #5496ba;
 }
 
-.journal-entry-link {
+.create-btn {
     margin: 5px;
     padding: 5px 10px;
     background-color: #24739e;
@@ -75,11 +80,41 @@ li a:hover {
     text-decoration: none;
 }
 
+.save-btn {
+    float: left;
+}
 
-/* General Body Styling */
-.base-body {
-    display: inline-block;
-    vertical-align: middle;
+.delete-btn {
+    float: right;
+    background-color: #ffc8cd;
+    color: #b41a58;
+    border-radius: 2px;
+    border: 1px solid #b41a58;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.update-btn {
+    margin: 5px;
+    padding: 2px 5px;
+    background-color: #24739e;
+    border: 1px solid #015582;
+    border-radius: 5px;
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.update-btn:hover {
+    background-color: #5496ba;
+}
+
+#delete-button:hover {
+    background-color: #ffc8cd;
+    color: #b41a58;
+    border-radius: 2px;
+    border: 1px solid #b41a58;
 }
 
 /* Journal Timeline */
@@ -107,22 +142,6 @@ li a:hover {
 #journal-crud {
     display: inline;
     float: right;
-}
-
-.journal-crud-link {
-    margin: 5px;
-    padding: 2px 5px;
-    background-color: #24739e;
-    border: 1px solid #015582;
-    border-radius: 5px;
-    width: fit-content;
-    color: white;
-    text-decoration: none;
-    font-size: 10px;
-}
-
-.journal-crud-link:hover {
-    background-color: #5496ba;
 }
 
 /* Journal Creation Styles */
@@ -175,4 +194,29 @@ li a:hover {
 
 .daily-goal-item {
     margin-top: 0;
+}
+
+/* Daily Goals Checklist Styling */
+.daily-goals-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.daily-goals-checklist-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.create-daily-goal-link-container {
+    margin-bottom: 10px;
+}
+
+.daily-goals-checklist-title {
+    margin-bottom: 0;
 }

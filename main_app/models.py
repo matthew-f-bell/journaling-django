@@ -44,4 +44,4 @@ class DailyGoals(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-date_submitted']
+        ordering = ['id']

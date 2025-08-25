@@ -10,7 +10,7 @@
 {% block body %}
     <div class="base-body">
         <h1 class="profile-page-title">Welcome, {{ user.username }} to your Journal!</h1>
-            <a class="journal-entry-link" href="{% url 'journal-entry' %}">
+            <a class="create-btn" href="{% url 'journal-entry' %}">
                 New Journal Entry
             </a>
         <div class="timeline-container">
@@ -21,8 +21,8 @@
                 <span>{{journal_entry.date_created}}</span>
                 <span>{{journal_entry.user.first_name}}</span>
                 <div id="journal-crud">
-                    <a class="journal-crud-link" href="{% url 'journal-update' journal_entry.pk %}">Update</a>
-                    <a class="journal-crud-link" href="{% url 'journal-delete' journal_entry.pk %}">Delete</a>
+                    <a class="update-btn" href="{% url 'journal-update' journal_entry.pk %}">Update</a>
+                    <a class="update-btn" id="delete-button" href="{% url 'journal-delete' journal_entry.pk %}">Delete</a>
                 </div>
             </div>
             {% endfor %}
