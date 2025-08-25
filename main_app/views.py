@@ -137,7 +137,7 @@ class Daily_Goals_Delete_View(DeleteView):
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse_lazy('daily-goals-checklist', kwargs={'user_id':user_id})
-    
+
 @method_decorator(login_required, name='dispatch')
 class Daily_Goals_Update_View(FormView):
     model = DailyGoals
@@ -156,15 +156,24 @@ class Daily_Goals_Update_View(FormView):
         user = self.request.user
         queryset = DailyGoals.objects.filter(user=user)
         formset = DailyGoalsUpdateFormset(request.POST, queryset=queryset)
+        print("made it to POST got user, queryset, and formset")
         if formset.is_valid():
             formset.save()
+            print("saved formset")
             return self.form_valid(formset)
         else:
             return self.form_invalid(formset)
     
     def form_valid(self, formset):
-        self.object  = formset.save(commit=False)
-        self.object.user = self.request.user
-        user_id = self.object.user.id
-        self.object.save()
-        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
+        print("form is valid")
+        return super().form_valid(formset)
+    
+    def form_invalid(self, formset):
+        print("form is invalid")
+        print(formset.errors)
+        return self.render_to_response(self.get_context_data(formset=formset))
+    
+    def get_success_url(self):
+        print("success")
+        user_id = self.request.user.id
+        return reverse_lazy('daily-goals-checklist', kwargs={'user_id':user_id})
