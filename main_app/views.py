@@ -9,7 +9,7 @@ from django.views.generic import FormView
 from django.views.generic.edit import UpdateView, DeleteView
 from .models import CustomUser, JournalEntry, DailyGoals
 from django.http import HttpResponseRedirect
-from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm
+from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm, DailyGoalsUpdateForm, DailyGoalsUpdateFormset
 
 
 
@@ -112,7 +112,7 @@ class Daily_Goals_Checklist_View(FormView):
                     goal_edit.date_submitted = get_date
                     print("consecutive " + goal)
                     goal_edit.save()
-                elif(next_day-get_date > timedelta(days=1)):
+                elif(next_day-get_date < timedelta(days=0)):
                     print(str(date_check))
                     goal_edit.consecutive_submissions = 1
                     goal_edit.date_submitted = get_date
@@ -124,13 +124,11 @@ class Daily_Goals_Checklist_View(FormView):
         elif 'delete_button' in self.request.POST:
             DailyGoals.objects.filter(pk__in=update_goals_id).delete()
             return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
+        
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse_lazy('user-profile', kwargs={'user_id':user_id})
 
-        
-
-    
 @method_decorator(login_required, name='dispatch')
 class Daily_Goals_Delete_View(DeleteView):
     model = DailyGoals
@@ -140,3 +138,33 @@ class Daily_Goals_Delete_View(DeleteView):
         user_id = self.request.user.id
         return reverse_lazy('daily-goals-checklist', kwargs={'user_id':user_id})
     
+@method_decorator(login_required, name='dispatch')
+class Daily_Goals_Update_View(FormView):
+    model = DailyGoals
+    fields = ['title']
+    form_class = DailyGoalsUpdateFormset
+    template_name = 'daily_goals_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        queryset = DailyGoals.objects.filter(user=user)
+        context['daily_goal_formset'] = DailyGoalsUpdateFormset(queryset=queryset)
+        return context
+
+    def post(self, request, *args,**kwargs):
+        user = self.request.user
+        queryset = DailyGoals.objects.filter(user=user)
+        formset = DailyGoalsUpdateFormset(request.POST, queryset=queryset)
+        if formset.is_valid():
+            formset.save()
+            return self.form_valid(formset)
+        else:
+            return self.form_invalid(formset)
+    
+    def form_valid(self, formset):
+        self.object  = formset.save(commit=False)
+        self.object.user = self.request.user
+        user_id = self.object.user.id
+        self.object.save()
+        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))

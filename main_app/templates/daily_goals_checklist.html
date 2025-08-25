@@ -9,6 +9,7 @@
     <div class="daily-goals-list-container">
         <div class="create-daily-goal-link-container">
             <a href="{% url 'daily-goals-create' %}" class="create-daily-goal-link">Create New Daily Goal</a>
+            <a href="{% url 'daily-goals-update' %}">Update Goals</a>
         </div>
         {% if form is None %}
             <h3>Please Create a Daily Goal</h3>
