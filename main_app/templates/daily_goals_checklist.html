@@ -8,8 +8,8 @@
 {% block body %}
     <div class="daily-goals-list-container">
         <div class="create-daily-goal-link-container">
-            <a href="{% url 'daily-goals-create' %}" class="create-btn">Create New Daily Goal</a>
-            <a href="{% url 'daily-goals-update' %}" class="update-btn">Update Goals</a>
+            <a href="{% url 'daily-goals-create' %}" class="create-btn" id="daily-create">Create New Daily Goal</a>
+            <a href="{% url 'daily-goals-update' %}" class="create-btn" id="daily-update">Update Goals</a>
         </div>
         {% if form is None %}
             <h3>Please Create a Daily Goal</h3>
@@ -20,7 +20,7 @@
                 {% for item in form %}
                     {{ item }}
                 {% endfor %}
-                <div class="btn-container">
+                <div class="goal-btn-container">
                     <button type="submit" name="save_button" class="save-btn">Submit</button>
                     <button type="submit" name="delete_button" class="delete-btn">Delete</button>
                 </div>

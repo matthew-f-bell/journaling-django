@@ -61,10 +61,6 @@ li a:hover {
     vertical-align: middle;
 }
 
-.btn-container {
-    width: 100%;
-}
-
 .create-btn:hover {
     background-color: #5496ba;
 }
@@ -214,9 +210,23 @@ li a:hover {
 }
 
 .create-daily-goal-link-container {
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    width: 100%;
 }
 
 .daily-goals-checklist-title {
     margin-bottom: 0;
+}
+
+.goal-btn-container {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#daily-create {
+    float: left;
+}
+
+#daily-update {
+    float: right;
 }
