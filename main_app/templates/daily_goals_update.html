@@ -7,14 +7,14 @@
 {% endblock %}
 
 {% block body %}
-    <div class="create-daily-goals">
-        <h1>Update Daily Goals:</h1>
+    <div class="daily-goals">
+        <h1 class="daily-goals-title">Update Daily Goals:</h1>
 
         <form method="post">
             {% csrf_token %}
             {{ daily_goal_formset.management_form }}
             {% for form in daily_goal_formset %}
-            <div class="goal-update-container">
+            <div class="goal-container">
                 <h4 class="goal-label">Goal:</h4>
                     {{ form.id }}
                     {{ form.title }}

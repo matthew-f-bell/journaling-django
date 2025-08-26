@@ -231,7 +231,17 @@ li a:hover {
     float: right;
 }
 
-.goal-update-container {
+.daily-goals {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.daily-goals-title {
+    margin-top: 0;
+}
+
+.goal-container {
     margin-bottom: 20px;
 }
 
