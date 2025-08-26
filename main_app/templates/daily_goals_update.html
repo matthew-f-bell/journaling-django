@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Create Daily Goals | Better Days 
+{% endblock %}
+
+{% block body %}
+    <div class="daily-goals">
+        <h1 class="daily-goals-title">Update Daily Goals:</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ daily_goal_formset.management_form }}
+            {% for form in daily_goal_formset %}
+            <div class="goal-container">
+                <h4 class="goal-label">Goal:</h4>
+                    {{ form.id }}
+                    {{ form.title }}
+            </div>
+            {% endfor %}
+            <input type="submit" value="Submit" class="save-btn">
+        </form>
+    </div>
+{% endblock %}
+

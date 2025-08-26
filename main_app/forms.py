@@ -1,5 +1,6 @@
 from django import forms
-from .models import JournalEntry
+from django.forms import modelformset_factory
+from .models import JournalEntry, DailyGoals
 from django.utils import timezone
 
 
@@ -13,3 +14,30 @@ class JournalEntryCreationForm(forms.ModelForm):
     class Meta:
         model = JournalEntry
         fields = ['title', 'journal_content']
+
+class DailyGoalCreationForm(forms.ModelForm):
+    title = forms.CharField(max_length=100)
+
+    class Meta:
+        model = DailyGoals
+        fields = ['title']
+
+class DailyGoalsChecklistForm(forms.ModelForm):
+    completed_daily_goals = forms.ModelMultipleChoiceField(
+        queryset=DailyGoals.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    class Meta:
+        model = DailyGoals
+        fields = []
+
+class DailyGoalsUpdateForm(forms.ModelForm):
+    title = forms.CharField(max_length=100)
+    
+    class Meta:
+        model = DailyGoals
+        fields = ['title']
+
+DailyGoalsUpdateFormset = modelformset_factory(DailyGoals, form=DailyGoalsUpdateForm, extra=0)

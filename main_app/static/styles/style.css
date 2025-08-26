@@ -1,13 +1,3 @@
-h3 {
-    margin-top: 0;
-}
-
-h4 {
-    width: fit-content;
-    height: fit-content;
-    margin-top: 0;
-}
-
 /* Navbar */
 nav {
     top: 0;
@@ -48,18 +38,23 @@ li a:hover {
     color: white;
 }
 
-
-
-/* Create New Journal Link Button */
-.journal-entry-link-container {
-    border: 3px solid red;
+/* General Styling */
+#body-fit {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
 }
 
-.journal-entry-link:hover {
+.btn-container {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.create-btn:hover {
     background-color: #5496ba;
 }
 
-.journal-entry-link {
+.create-btn {
     margin: 5px;
     padding: 5px 10px;
     background-color: #24739e;
@@ -70,42 +65,21 @@ li a:hover {
     text-decoration: none;
 }
 
-
-/* General Body Styling */
-.base-body {
-    display: inline-block;
-    margin-top: 38px;
-    vertical-align: middle;
+.save-btn {
+    float: left;
 }
 
-/* Journal Timeline */
-.timeline-container {
-    margin-top: 5px;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    width: fit-content;
-    max-width: 50%;
-    min-width: 20%;
-}
-
-.journal-entry-container {
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 5px;
-    margin: 5px;
-}
-
-.journal-entry-title {
-    border-bottom: 2px solid #5496ba;
-}
-
-#journal-crud {
-    display: inline;
+.delete-btn {
     float: right;
+    background-color: #ffc8cd;
+    color: #b41a58;
+    border-radius: 2px;
+    border: 1px solid #b41a58;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
-.journal-crud-link {
+.update-btn {
     margin: 5px;
     padding: 2px 5px;
     background-color: #24739e;
@@ -117,14 +91,63 @@ li a:hover {
     font-size: 10px;
 }
 
-.journal-crud-link:hover {
+.update-btn:hover {
     background-color: #5496ba;
+}
+
+#delete-button:hover {
+    background-color: #ffc8cd;
+    color: #b41a58;
+    border-radius: 2px;
+    border: 1px solid #b41a58;
+}
+
+/* Profile Styling */
+.profile-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.profile-page-title {
+    grid-column: 1 / span 3;
+}
+
+#profile-btn {
+    grid-column-start: 2;
+}
+
+/* Journal Timeline */
+.timeline-container {
+    grid-column-start: 2;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 20%;
+}
+
+.journal-entry-container {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.journal-entry-title {
+    margin-top: 0;
+    border-bottom: 2px solid #5496ba;
+}
+
+#journal-crud {
+    display: inline;
+    float: right;
 }
 
 /* Journal Creation Styles */
 .create-journal-page {
     display: block;
-    margin-top: 48px;
 }
 
 .journal-input-title {
@@ -149,4 +172,82 @@ li a:hover {
 
 .journal-form-btn:hover {
     background-color: #5496ba;
+}
+
+/* Daily Goals Styling */
+.daily-goals-widget {
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.daily-goals-link-container {
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid #5496ba;
+}
+
+.daily-goals-link {
+    text-decoration: none;
+}
+
+.daily-goal-item {
+    margin-top: 0;
+}
+
+/* Daily Goals Checklist Styling */
+.daily-goals-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.daily-goals-checklist-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.create-daily-goal-link-container {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.daily-goals-checklist-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#daily-create {
+    float: left;
+}
+
+#daily-update {
+    float: right;
+}
+
+.daily-goals {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.daily-goals-title {
+    margin-top: 0;
+}
+
+.goal-container {
+    margin-bottom: 20px;
+}
+
+.goal-label {
+    margin-top: 0;
+    margin-bottom: 0;
 }
