@@ -8,11 +8,13 @@
 
 <!-- Body Content -->
 {% block body %}
-    <div class="base-body">
-        <h1 class="profile-page-title">Welcome, {{ user.username }} to your Journal!</h1>
-            <a class="create-btn" href="{% url 'journal-entry' %}">
+    <div class="profile-body">
+        <h1 class="profile-page-title">
+            Welcome, {{ user.username }} to your Journal!
+        </h1>
+        <a class="create-btn" id="profile-btn" href="{% url 'journal-entry' %}">
                 New Journal Entry
-            </a>
+        </a>
         <div class="timeline-container">
             {% for journal_entry in journal_entries %}
             <div class="journal-entry-container">
@@ -39,8 +41,3 @@
         </div>
     </div>
 {% endblock %}
-
-<!-- 
-Pho Red Bo - for food & Da Vien for coffee
-Blow dry, straight iron, clip, and pull outward 
--->
