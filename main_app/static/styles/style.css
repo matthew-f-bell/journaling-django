@@ -61,6 +61,11 @@ li a:hover {
     vertical-align: middle;
 }
 
+.btn-container {
+    width: 100%;
+    margin-top: 10px;
+}
+
 .create-btn:hover {
     background-color: #5496ba;
 }
@@ -218,15 +223,18 @@ li a:hover {
     margin-bottom: 0;
 }
 
-.goal-btn-container {
-    width: 100%;
-    margin-top: 10px;
-}
-
 #daily-create {
     float: left;
 }
 
 #daily-update {
     float: right;
+}
+
+.goal-update-container {
+    margin-bottom: 20px;
+}
+
+.goal-label {
+    margin-bottom: 0;
 }

@@ -14,12 +14,13 @@
             {% csrf_token %}
             {{ daily_goal_formset.management_form }}
             {% for form in daily_goal_formset %}
-            <div>Goal:</div>
-                {{ form.id }}
-                {{ form.title }}
+            <div class="goal-update-container">
+                <h4 class="goal-label">Goal:</h4>
+                    {{ form.id }}
+                    {{ form.title }}
+            </div>
             {% endfor %}
-            <br/>
-            <input type="submit" value="Submit" class="form-btn">
+            <input type="submit" value="Submit" class="save-btn">
         </form>
     </div>
 {% endblock %}
