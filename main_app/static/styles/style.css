@@ -135,7 +135,17 @@ li a:hover {
 
 .journal-entry-title {
     margin-top: 0;
+    margin-bottom: 0;
     border-bottom: 2px solid #5496ba;
+}
+
+.journal-entry-date {
+    margin-top: 0;
+    font-size: small;
+}
+
+.journal-entry-author {
+    font-size: small;
 }
 
 

@@ -19,9 +19,9 @@
             {% for journal_entry in journal_entries %}
             <div class="journal-entry-container">
                 <h3 class="journal-entry-title">{{journal_entry.title}}</h3>
+                <span class="journal-entry-date">{{journal_entry.date_created}}</span>
                 <p>{{journal_entry.journal_content}}</p>
-                <span>{{journal_entry.date_created}}</span>
-                <span>{{journal_entry.user.first_name}}</span>
+                <span class="journal-entry-author">{{journal_entry.user.first_name}}</span>
                 <div id="journal-crud">
                     <a class="update-btn" href="{% url 'journal-update' journal_entry.pk %}">Update</a>
                     <a class="update-btn" id="delete-button" href="{% url 'journal-delete' journal_entry.pk %}">Delete</a>
