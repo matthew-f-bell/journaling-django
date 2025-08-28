@@ -25,8 +25,6 @@ li {
     border-right: 1px solid white;
 }
 
-
-
 li a:hover {
     background-color: #5496ba;
 }
@@ -197,6 +195,10 @@ li a:hover {
 
 .daily-goal-item {
     margin-top: 0;
+}
+
+.indent {
+    margin-left: 30px;
 }
 
 /* Daily Goals Checklist Styling */
