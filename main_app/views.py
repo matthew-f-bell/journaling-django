@@ -109,12 +109,14 @@ class Daily_Goals_Checklist_View(FormView):
                     print(str(date_check))
                     submission_increase = goal_edit.consecutive_submissions
                     goal_edit.consecutive_submissions = submission_increase + 1
+                    goal_edit.submissions_total = goal_edit.submissions_total + 1
                     goal_edit.date_submitted = get_date
                     print("consecutive " + goal)
                     goal_edit.save()
                 elif(next_day-get_date < timedelta(days=0)):
                     print(str(date_check))
                     goal_edit.consecutive_submissions = 1
+                    goal_edit.submissions_total = goal_edit.submissions_total + 1
                     goal_edit.date_submitted = get_date
                     print("non-consecutive " + goal)
                     goal_edit.save()

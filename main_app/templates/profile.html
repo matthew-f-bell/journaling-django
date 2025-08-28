@@ -35,8 +35,14 @@
             </h4>
                 {% for daily_goal in daily_goals %}
                 <div class="daily-goal-item">
-                    {{daily_goal.title}}: {{ daily_goal.consecutive_submissions }} Days in a Row
-                </div>
+                    {{daily_goal.title}}: 
+                        <div class="indent">
+                            {{ daily_goal.consecutive_submissions }} Day(s) in a Row
+                        </div>
+                        <div class="indent">
+                            {{ daily_goal.submissions_total }} Total Day(s) Completed
+                        </div>
+                    </div>
             {% endfor %}
         </div>
     </div>
