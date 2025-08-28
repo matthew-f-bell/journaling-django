@@ -46,3 +46,15 @@ class DailyGoals(models.Model):
 
     class Meta:
         ordering = ['id']
+
+class HydrationTracker(models.Model):
+     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+     water_intake = models.IntegerField(default=0)
+     max_water = models.IntegerField(default=0)
+     date_of_intake = models.DateField(default=timezone.now)
+
+     def __str__(self):
+          return self.max_water
+     
+     class Meta:
+          ordering = ['date_of_intake']
