@@ -15,6 +15,15 @@
         <a class="create-btn" id="profile-btn" href="{% url 'journal-entry' %}">
                 New Journal Entry
         </a>
+        <div class="hydration-tracker-container">
+            {% for hydration_tracker in hydration_trackers %}
+                {{hydration_tracker.water_intake}}
+            {% endfor %}
+            I am working!
+            <form action="post" class="hydration-form">
+                {{hydration_form}}
+            </form>
+        </div>
         <div class="timeline-container">
             {% for journal_entry in journal_entries %}
             <div class="journal-entry-container">

@@ -6,10 +6,10 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic import FormView
-from django.views.generic.edit import UpdateView, DeleteView
-from .models import CustomUser, JournalEntry, DailyGoals
+from django.views.generic.edit import UpdateView, DeleteView, FormMixin
+from .models import CustomUser, JournalEntry, DailyGoals, HydrationTracker
 from django.http import HttpResponseRedirect
-from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm, DailyGoalsUpdateForm, DailyGoalsUpdateFormset
+from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm, HydrationTrackerForm, DailyGoalsUpdateFormset
 
 
 
@@ -20,13 +20,25 @@ from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsCh
 class Home(TemplateView):
     template_name = 'home.html'
 
-@login_required
-def profile_view(request, user_id):
-    user = CustomUser.objects.get(id=user_id)
-    journal_entries = JournalEntry.objects.filter(user=user)
-    daily_goals = DailyGoals.objects.filter(user=user)
+@method_decorator(login_required, name='dispatch')
+class Profile_View(TemplateView, FormMixin):
+    model = CustomUser
+    form_class = HydrationTrackerForm
+    template_name = 'profile.html'
 
-    return render(request, 'profile.html', {'user': user, 'journal_entries':journal_entries, 'daily_goals':daily_goals})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user.id
+        context['journal_entries'] = JournalEntry.objects.filter(user=user)
+        context['daily_goals'] = DailyGoals.objects.filter(user=user)
+        context['hydration_trackers'] = HydrationTracker.objects.filter(user=user)
+        context['hydration_form'] = self.get_form()
+        return context
+    
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse_lazy('user-profile', kwargs={'user_id':user_id})
+
 
 # Journal CRUD Views
 @method_decorator(login_required, name='dispatch')
@@ -88,6 +100,11 @@ class Daily_Goals_Checklist_View(FormView):
     model = DailyGoals
     template_name = 'daily_goals_checklist.html'
     form_class = DailyGoalsChecklistForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -158,24 +175,18 @@ class Daily_Goals_Update_View(FormView):
         user = self.request.user
         queryset = DailyGoals.objects.filter(user=user)
         formset = DailyGoalsUpdateFormset(request.POST, queryset=queryset)
-        print("made it to POST got user, queryset, and formset")
         if formset.is_valid():
             formset.save()
-            print("saved formset")
             return self.form_valid(formset)
         else:
             return self.form_invalid(formset)
     
     def form_valid(self, formset):
-        print("form is valid")
         return super().form_valid(formset)
     
     def form_invalid(self, formset):
-        print("form is invalid")
-        print(formset.errors)
         return self.render_to_response(self.get_context_data(formset=formset))
     
     def get_success_url(self):
-        print("success")
         user_id = self.request.user.id
         return reverse_lazy('daily-goals-checklist', kwargs={'user_id':user_id})

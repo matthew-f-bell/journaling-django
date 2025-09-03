@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import modelformset_factory
-from .models import JournalEntry, DailyGoals
+from .models import JournalEntry, DailyGoals, HydrationTracker
 from django.utils import timezone
 
 
@@ -29,6 +29,14 @@ class DailyGoalsChecklistForm(forms.ModelForm):
         required=False
     )
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['completed_daily_goals'].queryset = DailyGoals.objects.filter(user=user)
+        else:
+            self.fields['completed_daily_goals'].queryset = DailyGoals.objects.none()
+
     class Meta:
         model = DailyGoals
         fields = []
@@ -41,3 +49,10 @@ class DailyGoalsUpdateForm(forms.ModelForm):
         fields = ['title']
 
 DailyGoalsUpdateFormset = modelformset_factory(DailyGoals, form=DailyGoalsUpdateForm, extra=0)
+
+class HydrationTrackerForm(forms.ModelForm):
+    water_intake = forms.IntegerField(initial=0)
+
+    class Meta:
+        model = HydrationTracker
+        fields = ['water_intake']

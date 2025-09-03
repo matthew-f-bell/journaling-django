@@ -264,3 +264,10 @@ li a:hover {
     margin-top: 0;
     margin-bottom: 0;
 }
+
+/* Hydration Tracker Styling */
+.hydration-tracker-container {
+    grid-column-start: 1;
+    border: 2px solid red;
+    width: fit-content;
+}
