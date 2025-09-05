@@ -16,13 +16,19 @@
                 New Journal Entry
         </a>
         <div class="hydration-tracker-container">
+            <h4 class="hydration-tracker-title">
+                Daily Hydration:
+            </h4>
+            <form method="POST" class="hydration-form">
+                {% csrf_token %}
+                {{form}}
+                <button type="submit">Submit</button>
+            </form>
             {% for hydration_tracker in hydration_trackers %}
+                {{hydration_tracker.date_of_intake}}
                 {{hydration_tracker.water_intake}}
             {% endfor %}
             I am working!
-            <form action="post" class="hydration-form">
-                {{hydration_form}}
-            </form>
         </div>
         <div class="timeline-container">
             {% for journal_entry in journal_entries %}

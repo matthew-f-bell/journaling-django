@@ -30,10 +30,12 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
     STATIC_URL = '/static'
+    STATIC_ROOT = BASE_DIR / 'static/'
 
 else:
     DEBUG = True
     STATIC_URL = '/static/'
+
 
 # Production Whitenoise Mime Types
 WHITENOISE_MIMETYPES = {
@@ -146,8 +148,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-# Set Deployment Static Root
-STATIC_ROOT = BASE_DIR / 'static/'
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

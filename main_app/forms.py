@@ -51,8 +51,9 @@ class DailyGoalsUpdateForm(forms.ModelForm):
 DailyGoalsUpdateFormset = modelformset_factory(DailyGoals, form=DailyGoalsUpdateForm, extra=0)
 
 class HydrationTrackerForm(forms.ModelForm):
-    water_intake = forms.IntegerField(initial=0)
-
     class Meta:
         model = HydrationTracker
         fields = ['water_intake']
+        widgets = {
+            'water_intake': forms.RadioSelect,
+        }

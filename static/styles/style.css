@@ -135,8 +135,19 @@ li a:hover {
 
 .journal-entry-title {
     margin-top: 0;
+    margin-bottom: 0;
     border-bottom: 2px solid #5496ba;
 }
+
+.journal-entry-date {
+    margin-top: 0;
+    font-size: small;
+}
+
+.journal-entry-author {
+    font-size: small;
+}
+
 
 #journal-crud {
     display: inline;
@@ -174,6 +185,7 @@ li a:hover {
 
 /* Daily Goals Styling */
 .daily-goals-widget {
+    max-width: 1fr;
     width: fit-content;
     height: fit-content;
     border: 2px solid black;
@@ -252,4 +264,18 @@ li a:hover {
 .goal-label {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+/* Hydration Tracker Styling */
+.hydration-tracker-container {
+    grid-column-start: 1;
+    border: 2px solid red;
+    width: 1fr;
+    max-width: 1fr;
+}
+
+.hydration-tracker-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid #5496ba;
 }

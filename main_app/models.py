@@ -48,13 +48,19 @@ class DailyGoals(models.Model):
         ordering = ['id']
 
 class HydrationTracker(models.Model):
-     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-     water_intake = models.IntegerField(default=0)
-     max_water = models.IntegerField(default=0)
-     date_of_intake = models.DateField(default=timezone.now)
+    HYDRATION_CHOICES = [
+        (8, "8 oz"),
+        (16, "16 oz"),
+        (32, "32 oz")
+    ]
 
-     def __str__(self):
-          return self.max_water
-     
-     class Meta:
-          ordering = ['date_of_intake']
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    water_intake = models.PositiveIntegerField(choices=HYDRATION_CHOICES, default=0)
+    max_water = models.IntegerField(default=0)
+    date_of_intake = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return self.max_water
+    
+    class Meta:
+        ordering = ['date_of_intake']
