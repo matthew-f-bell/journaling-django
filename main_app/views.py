@@ -49,7 +49,6 @@ class Profile_View(TemplateView, FormMixin):
         intake_of_water = self.request.POST.getlist("water_intake")
         get_datetime = timezone.now()
         get_date = get_datetime.date()
-        print("get_date = " + str(get_date))
         print("my intake of water is " + str(int(intake_of_water[0])))
         exist_check = HydrationTracker.objects.filter(date_of_intake=get_date).exists()
         print("I do exist "+ str(exist_check))
@@ -67,13 +66,31 @@ class Profile_View(TemplateView, FormMixin):
                 hydration_day.water_intake = old_water + int(intake_of_water[0])
                 hydration_day.save()
         elif '16' in intake_of_water:
-            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
-            hydration_day.water_intake = hydration_day.water_intake + intake_of_water
-            print(hydration_day + " has been selected for 16 oz")
+            if exist_check == False:
+                HydrationTracker.objects.create(user=self.object.user, date_of_intake=get_date)
+                hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+                print(str(hydration_day.date_of_intake) + " has " + str(hydration_day.water_intake) + " to be filled with " + " has been selected for 16 oz")
+                hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+                hydration_day.save()
+            else:
+                hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+                old_water = hydration_day.water_intake
+                print(str(hydration_day.date_of_intake) + " has " + str(old_water) + " to be filled with " + " has been selected for 16 oz")
+                hydration_day.water_intake = old_water + int(intake_of_water[0])
+                hydration_day.save()
         elif '32' in intake_of_water:
-            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
-            hydration_day.water_intake = hydration_day.water_intake + intake_of_water
-            print(hydration_day + " has been selected for 32 oz")
+            if exist_check == False:
+                HydrationTracker.objects.create(user=self.object.user, date_of_intake=get_date)
+                hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+                print(str(hydration_day.date_of_intake) + " has " + str(hydration_day.water_intake) + " to be filled with " + " has been selected for 32 oz")
+                hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+                hydration_day.save()
+            else:
+                hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+                old_water = hydration_day.water_intake
+                print(str(hydration_day.date_of_intake) + " has " + str(old_water) + " to be filled with " + " has been selected for 32 oz")
+                hydration_day.water_intake = old_water + int(intake_of_water[0])
+                hydration_day.save()
         else:
             hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
             print("*_*_*_*_*_*_*_* Not a valid submission!!!!!! *_*_*_*_*_*_*_*")
