@@ -63,4 +63,4 @@ class HydrationTracker(models.Model):
         return self.max_water
     
     class Meta:
-        ordering = ['date_of_intake']
+        ordering = ['-date_of_intake']

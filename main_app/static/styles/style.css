@@ -269,7 +269,7 @@ li a:hover {
 /* Hydration Tracker Styling */
 .hydration-tracker-container {
     grid-column-start: 1;
-    border: 2px solid red;
+    border: 2px solid black;
     border-radius: 10px;
     padding:10px;
     width: 1fr;
@@ -280,4 +280,50 @@ li a:hover {
     margin-top: 0;
     margin-bottom: 0;
     border-bottom: 2px solid #5496ba;
+}
+
+.hydration-date-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 5px;
+}
+
+.water-block {
+    height: 25px;
+    width: 25px;
+}
+
+#no-water {
+    background-color: #151c24;
+    border-radius: 5px;
+}
+
+#lightest-water {
+    background-color: #11638f;
+    border-radius: 5px;
+}
+
+#light-water {
+    background-color: #3a84ab;
+    border-radius: 5px;
+}
+
+#average-water {
+    background-color: #6fa8c7;
+    border-radius: 5px;
+}
+
+#heavy-water {
+    background-color: #8ebcd5;
+    border-radius: 5px;
+}
+
+#heaviest-water {
+    background-color: #b1d1e3;
+    border-radius: 5px;
+}
+
+#perfect-water {
+    background-color: goldenrod;
+    border-radius: 5px;
 }
