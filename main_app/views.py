@@ -6,27 +6,87 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic import FormView
-from django.views.generic.edit import UpdateView, DeleteView
-from .models import CustomUser, JournalEntry, DailyGoals
+from django.views.generic.edit import UpdateView, DeleteView, FormMixin
+from .models import CustomUser, JournalEntry, DailyGoals, HydrationTracker
 from django.http import HttpResponseRedirect
-from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm, DailyGoalsUpdateForm, DailyGoalsUpdateFormset
+from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm, HydrationTrackerForm, DailyGoalsUpdateFormset
 
 
-
-
-# Create your views here.
 
 # Home Page View
 class Home(TemplateView):
     template_name = 'home.html'
 
-@login_required
-def profile_view(request, user_id):
-    user = CustomUser.objects.get(id=user_id)
-    journal_entries = JournalEntry.objects.filter(user=user)
-    daily_goals = DailyGoals.objects.filter(user=user)
+@method_decorator(login_required, name='dispatch')
+class Profile_View(TemplateView, FormMixin):
+    model = CustomUser
+    form_class = HydrationTrackerForm
+    template_name = 'profile.html'
 
-    return render(request, 'profile.html', {'user': user, 'journal_entries':journal_entries, 'daily_goals':daily_goals})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user.id
+        get_datetime = timezone.localtime()
+        print(get_datetime)
+        get_date = get_datetime.date()
+
+        if HydrationTracker.objects.filter(user=user).exists() == False:
+            one_year_of_hydration_null = get_date - timedelta(days=365)
+            while one_year_of_hydration_null <= get_date:
+                HydrationTracker.objects.create(user=self.request.user, date_of_intake=one_year_of_hydration_null, water_intake=0)
+                one_year_of_hydration_null = one_year_of_hydration_null + timedelta(days=1)
+        elif HydrationTracker.objects.filter(user=user).latest('date_of_intake').date_of_intake + timedelta(days=1) < get_date:
+            hydration_catch_up = HydrationTracker.objects.filter(user=user).latest('date_of_intake').date_of_intake
+            while hydration_catch_up < get_date:
+                HydrationTracker.objects.create(user=self.request.user, date_of_intake=hydration_catch_up, water_intake=0)
+                hydration_catch_up = hydration_catch_up + timedelta(days=1)
+        elif HydrationTracker.objects.filter(user=user).filter(date_of_intake=get_date).exists() == False:
+                HydrationTracker.objects.create(user=self.request.user, date_of_intake=get_date, water_intake=0)
+        else:
+            print("Did not create anything")
+
+        context['journal_entries'] = JournalEntry.objects.filter(user=user)
+        context['daily_goals'] = DailyGoals.objects.filter(user=user)
+        context['hydration_trackers'] = HydrationTracker.objects.filter(user=user)
+        context['hydration_form'] = self.get_form()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form = HydrationTrackerForm(request.POST)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        user_id = self.object.user.id
+        intake_of_water = self.request.POST.getlist("water_intake")
+        get_datetime = timezone.localtime()
+        get_date = get_datetime.date()
+        if '8' in intake_of_water:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+            hydration_day.save()
+        elif '16' in intake_of_water:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+            hydration_day.save()
+        elif '32' in intake_of_water:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+            hydration_day.save()
+        else:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            print("*_*_*_*_*_*_*_* Not a valid submission!!!!!! *_*_*_*_*_*_*_*")
+            print(hydration_day)
+        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
+    
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse_lazy('user-profile', kwargs={'user_id':user_id})
+
 
 # Journal CRUD Views
 @method_decorator(login_required, name='dispatch')
@@ -89,13 +149,18 @@ class Daily_Goals_Checklist_View(FormView):
     template_name = 'daily_goals_checklist.html'
     form_class = DailyGoalsChecklistForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         user_id = self.object.user.id
         update_goals_id = self.request.POST.getlist("completed_daily_goals")
         print(update_goals_id)
-        get_datetime = timezone.now()
+        get_datetime = timezone.localtime()
         get_date = get_datetime.date()
         print("get_date = " + str(get_date))
         if 'save_button' in self.request.POST:
@@ -158,24 +223,18 @@ class Daily_Goals_Update_View(FormView):
         user = self.request.user
         queryset = DailyGoals.objects.filter(user=user)
         formset = DailyGoalsUpdateFormset(request.POST, queryset=queryset)
-        print("made it to POST got user, queryset, and formset")
         if formset.is_valid():
             formset.save()
-            print("saved formset")
             return self.form_valid(formset)
         else:
             return self.form_invalid(formset)
     
     def form_valid(self, formset):
-        print("form is valid")
         return super().form_valid(formset)
     
     def form_invalid(self, formset):
-        print("form is invalid")
-        print(formset.errors)
         return self.render_to_response(self.get_context_data(formset=formset))
     
     def get_success_url(self):
-        print("success")
         user_id = self.request.user.id
         return reverse_lazy('daily-goals-checklist', kwargs={'user_id':user_id})
