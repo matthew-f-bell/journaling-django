@@ -324,7 +324,7 @@ li a:hover {
 }
 
 #perfect-water {
-    background-color: goldenrod;
+    background-color: #f2e855;
     border-radius: 5px;
 }
 
@@ -334,7 +334,7 @@ li a:hover {
     width: 25px;
     position: relative;
     overflow: hidden;
-    background-color: goldenrod;
+    background-color: #f2e855;
 }
 
 .corner {
