@@ -40,7 +40,21 @@
                     {% elif hydration_tracker.water_intake >= 101 and 127 >= hydration_tracker.water_intake %}
                         <div class="water-block" id="heaviest-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
                     {% elif hydration_tracker.water_intake >= 128 %}
-                        <div class="water-block" id="perfect-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
+                        <div class="water-block" id="perfect-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> 
+                            <div class="star-container">
+                                <div class="corner" id="corner-1"></div>
+                                <div class="corner" id="corner-2"></div>
+                                <div class="corner" id="corner-3"></div>
+                                <div class="corner" id="corner-4"></div>
+                                <div class="corner" id="corner-5"></div>
+
+                                <div class="inner-corner" id="inner-corner-1"></div>
+                                <div class="inner-corner" id="inner-corner-2"></div>
+                                <div class="inner-corner" id="inner-corner-3"></div>
+                                <div class="inner-corner" id="inner-corner-4"></div>
+                                <div class="inner-corner" id="inner-corner-5"></div>
+                            </div>
+                        </div>
                     {% endif %}
             {% endfor %}
             </div>
