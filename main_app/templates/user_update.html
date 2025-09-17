@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Update User Info | Better Days Coming
+{% endblock %}
+
+{% block body %}
+    <div class="create-journal-page">
+        <h1>Update User Info:</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="journal-input-container">
+                    <h4 class="journal-input-title">
+                        Username:
+                    </h4>
+                    {{ form.username }}
+                    <h4 class="journal-input-entry">
+                        First Name:
+                    </h4>
+                    {{ form.first_name }}
+            </div>
+            <div class="create-daily-goal-link-container">
+                <input class="journal-form-btn" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+{% endblock %}

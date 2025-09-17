@@ -10,7 +10,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
-    first_name=models.CharField(max_length=100)
+    first_name=models.CharField(max_length=100, default="Profile")
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 

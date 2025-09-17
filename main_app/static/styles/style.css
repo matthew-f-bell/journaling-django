@@ -163,6 +163,10 @@ li a:hover {
     margin-bottom: 0;
 }
 
+.journal-input-container {
+    margin-bottom: 20px;
+}
+
 .journal-input-entry {
     margin-bottom: 0;
     min-width: 10%;

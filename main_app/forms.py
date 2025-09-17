@@ -1,8 +1,12 @@
 from django import forms
 from django.forms import modelformset_factory
-from .models import JournalEntry, DailyGoals, HydrationTracker
+from .models import CustomUser, JournalEntry, DailyGoals, HydrationTracker
 from django.utils import timezone
 
+class CustomUserForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'first_name']
 
 class JournalEntryCreationForm(forms.ModelForm):
     get_datetime = timezone.now()
