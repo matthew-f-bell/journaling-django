@@ -100,6 +100,15 @@ li a:hover {
     border: 1px solid #b41a58;
 }
 
+.cancel-btn {
+    background-color: lightgray;
+    color: black;
+    border-radius: 2px;
+    border: 1px solid black;
+    padding: 2px 5px;
+    text-decoration: none;
+}
+
 /* Profile Styling */
 .profile-body {
     display: grid;
@@ -112,6 +121,21 @@ li a:hover {
 
 #profile-btn {
     grid-column-start: 2;
+}
+
+.user-del-btn {
+    text-decoration: none;
+    padding: 2px 5px;
+}
+
+.delete-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 /* Journal Timeline */
@@ -161,6 +185,10 @@ li a:hover {
 
 .journal-input-title {
     margin-bottom: 0;
+}
+
+.journal-input-container {
+    margin-bottom: 20px;
 }
 
 .journal-input-entry {

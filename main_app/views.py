@@ -29,6 +29,11 @@ class Profile_Update_View(UpdateView):
         user = self.object.user.id
         self.object.save()
         return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user}))
+    
+class Profile_Delete_View(DeleteView):
+    model = CustomUser
+    template_name = 'user_delete.html'
+    success_url = ''
 
 
 # Home Page View

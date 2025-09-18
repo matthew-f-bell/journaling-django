@@ -18,7 +18,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-                return self.email
+        return self.email
 
 class JournalEntry(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
