@@ -32,12 +32,14 @@
                     {{user.first_name}}
                 </a>
             </li>
-            <!--
-            <li><a href="">Edit Profile</a></li>
-            -->
-            <li style="float:right; border-left: 1px solid white">
+            <li style="float:right;">
                 <a class="nav-link"  href="{% url 'account_logout' %}">
                     Logout
+                </a>
+            </li>
+            <li style="float:right; border-left: 1px solid white">
+                <a class="nav-link" href="{% url 'user-update' user.id %}">
+                    Edit Profile
                 </a>
             </li>
             {% else %}

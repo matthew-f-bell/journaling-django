@@ -9,8 +9,31 @@ from django.views.generic import FormView
 from django.views.generic.edit import UpdateView, DeleteView, FormMixin
 from .models import CustomUser, JournalEntry, DailyGoals, HydrationTracker
 from django.http import HttpResponseRedirect
-from .forms import JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm, HydrationTrackerForm, DailyGoalsUpdateFormset
+from .forms import CustomUserForm, JournalEntryCreationForm, DailyGoalCreationForm, DailyGoalsChecklistForm, HydrationTrackerForm, DailyGoalsUpdateFormset
 
+
+
+# User Profile CRUD
+@method_decorator(login_required, name='dispatch')
+class Profile_Update_View(UpdateView):
+    model = CustomUser
+    form_class = CustomUserForm
+    template_name = 'user_update.html'
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        user = self.object.user.id
+        self.object.save()
+        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user}))
+    
+class Profile_Delete_View(DeleteView):
+    model = CustomUser
+    template_name = 'user_delete.html'
+    success_url = ''
 
 
 # Home Page View
