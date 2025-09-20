@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -210,3 +211,21 @@ LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Rich Text Editor Configurations
+CKEDITOR_CONFIGS = {
+    'default':  {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            [ 'Font', 'FontSize', 'TextColor', 'BGColor' ],
+            [ 'Bold', 'Italic', 'Underline', 'Subscript', 'Superscript' ],
+            [ 'Undo', 'Redo' ],
+            [ 'Indent', 'Outdent' ],
+            [ 'JustifyBlock', 'JustifyCenter', 'JustifyLeft', 'JustifyRight' ],
+            [ 'BulletedList', 'NumberedList' ],
+            [ 'Smiley', 'SpecialChar' ]
+        ],
+        'removePlugins': 'ajax,autoembed,devtools,elementspath,filetools,image,image2,sourcedialog,stylesheetparser,table,tableresize,tabletools,uploadimage,uploadwidget'
+    }
+}
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
