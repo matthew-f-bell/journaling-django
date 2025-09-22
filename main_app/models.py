@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.utils import timezone
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 
@@ -23,7 +24,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
 class JournalEntry(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, blank=True)
-    journal_content = models.CharField(max_length=100000)
+    journal_content = CKEditor5Field(blank=True, null=True)
     date_created = models.DateTimeField(default=timezone.now)
 
     REQUIRED_FIELDS = ['journal-content', 'user', 'date_created']

@@ -7,6 +7,10 @@
     Create Journal Entry | Better Days Coming
 {% endblock %}
 
+{% block additional-head %}
+    {{ form.media }}
+{% endblock %}
+
 {% block body %}
 <div class="create-journal-page">
     <h1>Create Journal Entry:</h1>
@@ -14,9 +18,18 @@
     <form method="post">
         {% csrf_token %}
         <div>
-            <div class="journal-input-container"><h4 class="journal-input-title">Title:</h4>{{ form.title }}</div>
-            <br/>
-            <div class="journal-input-container"><h4 class="journal-input-entry">Journal Entry:</h4>{{ form.journal_content }}</div>
+            <div class="journal-input-container">
+                <h4 class="journal-input-title">
+                    Title:
+                </h4>
+                {{ form.title }}
+            </div>
+            <div class="journal-input-container">
+                <h4 class="journal-input-entry">
+                    Journal Entry:
+                </h4>
+                {{ form.journal_content }}
+            </div>
         </div>
         <input class="journal-form-btn" type="submit" value="Submit">
     </form>

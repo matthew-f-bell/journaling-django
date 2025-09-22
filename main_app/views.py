@@ -50,7 +50,6 @@ class Profile_View(TemplateView, FormMixin):
         context = super().get_context_data(**kwargs)
         user = self.request.user.id
         get_datetime = timezone.localtime()
-        print(get_datetime)
         get_date = get_datetime.date()
 
         if HydrationTracker.objects.filter(user=user).exists() == False:
@@ -66,7 +65,7 @@ class Profile_View(TemplateView, FormMixin):
         elif HydrationTracker.objects.filter(user=user).filter(date_of_intake=get_date).exists() == False:
                 HydrationTracker.objects.create(user=self.request.user, date_of_intake=get_date, water_intake=0)
         else:
-            print("Did not create anything")
+            print("Did nothing")
 
         context['journal_entries'] = JournalEntry.objects.filter(user=user)
         context['daily_goals'] = DailyGoals.objects.filter(user=user)
@@ -182,31 +181,23 @@ class Daily_Goals_Checklist_View(FormView):
         self.object.user = self.request.user
         user_id = self.object.user.id
         update_goals_id = self.request.POST.getlist("completed_daily_goals")
-        print(update_goals_id)
         get_datetime = timezone.localtime()
         get_date = get_datetime.date()
-        print("get_date = " + str(get_date))
         if 'save_button' in self.request.POST:
             for goal in update_goals_id:
                 goal_edit = DailyGoals.objects.get(id=goal)
                 date_check = goal_edit.date_submitted
                 next_day = date_check + timedelta(days=1)
-                print(str(next_day))
-                print("difference of dates = " + str(next_day-get_date))
                 if (next_day-get_date == timedelta(days=0)):
-                    print(str(date_check))
                     submission_increase = goal_edit.consecutive_submissions
                     goal_edit.consecutive_submissions = submission_increase + 1
                     goal_edit.submissions_total = goal_edit.submissions_total + 1
                     goal_edit.date_submitted = get_date
-                    print("consecutive " + goal)
                     goal_edit.save()
                 elif(next_day-get_date < timedelta(days=0)):
-                    print(str(date_check))
                     goal_edit.consecutive_submissions = 1
                     goal_edit.submissions_total = goal_edit.submissions_total + 1
                     goal_edit.date_submitted = get_date
-                    print("non-consecutive " + goal)
                     goal_edit.save()
                 else:
                     print("Did nothing for " + goal)
