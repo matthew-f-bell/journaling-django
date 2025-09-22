@@ -2,7 +2,7 @@ from django import forms
 from django.forms import modelformset_factory
 from .models import CustomUser, JournalEntry, DailyGoals, HydrationTracker
 from django.utils import timezone
-from ckeditor.widgets import CKEditorWidget
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 class CustomUserForm(forms.ModelForm):
     class Meta:
@@ -14,7 +14,7 @@ class JournalEntryCreationForm(forms.ModelForm):
     current_date = get_datetime.date()
 
     title = forms.CharField(max_length=100, initial=current_date)
-    journal_content = forms.CharField(widget=CKEditorWidget())
+    journal_content = forms.CharField(widget=CKEditor5Widget())
 
     class Meta:
         model = JournalEntry

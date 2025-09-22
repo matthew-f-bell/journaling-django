@@ -7,6 +7,10 @@
     Create Journal Entry | Better Days Coming
 {% endblock %}
 
+{% block additional-head %}
+    {{ form.media }}
+{% endblock %}
+
 {% block body %}
 <div class="create-journal-page">
     <h1>Create Journal Entry:</h1>
@@ -24,7 +28,6 @@
                 <h4 class="journal-input-entry">
                     Journal Entry:
                 </h4>
-                {{ form.media }}
                 {{ form.journal_content }}
             </div>
         </div>

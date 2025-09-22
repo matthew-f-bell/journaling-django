@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'ckeditor',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -212,19 +212,24 @@ LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Rich Text Editor Configurations
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     'default':  {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            [ 'Font', 'FontSize', 'TextColor', 'BGColor' ],
-            [ 'Bold', 'Italic', 'Underline', 'Subscript', 'Superscript' ],
-            [ 'Undo', 'Redo' ],
-            [ 'Indent', 'Outdent' ],
-            [ 'JustifyBlock', 'JustifyCenter', 'JustifyLeft', 'JustifyRight' ],
-            [ 'BulletedList', 'NumberedList' ],
-            [ 'Smiley', 'SpecialChar' ]
+        'toolbar': [
+                'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                '|',
+                'Bold', 'Italic', 'Underline', 'Subscript', 'Superscript',
+                '|',
+                'Undo', 'Redo',
+                '|',
+                'Indent', 'Outdent',
+                '|',
+                'alignment',
+                '|',
+                'BulletedList', 'NumberedList',
+                '|',
+                'SpecialCharacters'
         ],
-        'removePlugins': 'ajax,autoembed,devtools,elementspath,filetools,image,image2,sourcedialog,stylesheetparser,table,tableresize,tabletools,uploadimage,uploadwidget'
+        'removePlugins': ['UploadAdapter', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageResize', 'ImageUpload', 'SimpleUploadAdapter', 'ImageInsert', 'Link', 'LinkImage', 'MediaEmbed', 'HtmlEmbed', 'SourceEditing']
     }
 }
 
