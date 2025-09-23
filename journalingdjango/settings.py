@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # Define general behavior variables for DJANGO_HOST and all others
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
-    STATIC_URL = '/static'
+    STATIC_URL = '/staticfiles'
     STATIC_ROOT = BASE_DIR / 'staticfiles/'
     STATICFILES_DIRS = [
         BASE_DIR / 'main_app/static/'
