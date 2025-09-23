@@ -32,7 +32,7 @@ if os.getenv("DJANGO_HOST") == "production":
     STATIC_URL = '/static'
     STATIC_ROOT = BASE_DIR / 'staticfiles/'
     STATICFILES_DIRS = [
-        BASE_DIR / 'static/'
+        BASE_DIR / 'main_app/static/'
     ]
 
 else:
