@@ -29,11 +29,11 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # Define general behavior variables for DJANGO_HOST and all others
 if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
-    STATIC_URL = '/static'
+    STATIC_URL = '/static/'
     STATIC_ROOT = BASE_DIR / 'static/'
-    CKEDITOR_BASEPATH = '/static/django_ckeditor_5/'
+    CKEDITOR_BASEPATH = BASE_DIR / '/static/django_ckeditor_5/'
 
-else:
+elif os.getenv("DJANGO_HOST") == "dev":
     DEBUG = True
     STATIC_URL = '/static/'
 
