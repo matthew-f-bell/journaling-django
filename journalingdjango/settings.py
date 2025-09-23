@@ -31,6 +31,7 @@ if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
     STATIC_URL = '/static'
     STATIC_ROOT = BASE_DIR / 'static/'
+    CKEDITOR_BASEPATH = BASE_DIR / 'static/django_ckeditor_5/'
 
 else:
     DEBUG = True
