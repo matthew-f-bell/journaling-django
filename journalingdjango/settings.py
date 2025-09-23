@@ -31,6 +31,9 @@ if os.getenv("DJANGO_HOST") == "production":
     DEBUG = False
     STATIC_URL = '/static'
     STATIC_ROOT = BASE_DIR / 'static/'
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static/'
+    ]
 
 else:
     DEBUG = True
