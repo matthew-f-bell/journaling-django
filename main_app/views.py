@@ -319,3 +319,14 @@ class Hydration_Tracker_View(TemplateView, FormMixin):
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse_lazy('user-profile', kwargs={'user_id':user_id})
+    
+@method_decorator(login_required, name='dispatch')
+class Daily_Goals_List_View(TemplateView):
+    model = CustomUser
+    template_name = 'daily_goals_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user.id
+        context['daily_goals'] = DailyGoals.objects.filter(user=user)
+        return context

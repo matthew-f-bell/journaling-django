@@ -14,4 +14,5 @@ urlpatterns = [
     path('daily-goals-delete/<int:pk>', views.Daily_Goals_Delete_View.as_view(), name='daily-goals-delete'),
     path('daily-goals-update/', views.Daily_Goals_Update_View.as_view(), name='daily-goals-update'),
     path('hydration-tracker/<int:user_id>', views.Hydration_Tracker_View.as_view(), name='hydration-tracker'),
+    path('daily-goals/<int:user_id>', views.Daily_Goals_List_View.as_view(), name='daily-goals-list'),
 ]
