@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tz %}
+
+<!-- Tab Title -->
+{% block title %}
+    Profile | Better Days Coming
+{% endblock %}
+
+<!-- Body Content -->
+{% block body %}
+    <div class="mobile-daily-goals-widget">
+        <h4 class="daily-goals-link-container">
+            <a href="{% url 'daily-goals-checklist' user.id %}" class="daily-goals-link">Daily Goals</a>
+        </h4>
+            {% for daily_goal in daily_goals %}
+            <div class="daily-goal-item">
+                {{daily_goal.title}}: 
+                    <div class="indent">
+                        {{ daily_goal.consecutive_submissions }} Day(s) in a Row
+                    </div>
+                    <div class="indent">
+                        {{ daily_goal.submissions_total }} Total Day(s) Completed
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}

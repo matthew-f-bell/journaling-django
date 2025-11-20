@@ -245,6 +245,15 @@ li a:hover {
     margin: 5px;
 }
 
+.mobile-daily-goals-widget {
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
 .daily-goals-link-container {
     margin-top: 0;
     margin-bottom: 0;
