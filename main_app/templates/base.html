@@ -24,7 +24,7 @@
     <nav>
         <ul>
             <li>
-                <a class="nav-link" style="border-right: none" href="/">
+                <a class="nav-link" id="home-btn" href="/">
                     Home
                 </a>
             </li>
@@ -34,18 +34,28 @@
                     {{user.first_name}}
                 </a>
             </li>
-            <li style="float:right;">
+            <li id="nav-goals">
+                <a class="nav-link" href="{% url 'daily-goals-checklist' user.id %}">
+                    Goals
+                </a>
+            </li>
+            <li id="nav-hydration">
+                <a class="nav-link" href="{% url 'hydration-tracker' user.id %}">
+                    Hydration
+                </a>
+            </li>
+            <li id="nav-logout">
                 <a class="nav-link"  href="{% url 'account_logout' %}">
                     Logout
                 </a>
             </li>
-            <li style="float:right; border-left: 1px solid white">
+            <li id="nav-edit-profile">
                 <a class="nav-link" href="{% url 'user-update' user.id %}">
                     Edit Profile
                 </a>
             </li>
             {% else %}
-            <li style="float:right; border-left: 1px solid white">
+            <li id="nav-login">
                 <a class="nav-link" href="{% url 'account_login' %}">
                     Login/Sign-Up
                 </a>

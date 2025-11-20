@@ -1,8 +1,13 @@
+
+
 /* Navbar */
 nav {
     top: 0;
     left: 0;
 }
+
+
+
 
 ul {
     top: 0;
@@ -15,7 +20,7 @@ ul {
     width: 100%;
 }
 
-#home-btn {
+.home-btn {
     border-right: none;
 }
 
@@ -35,6 +40,25 @@ li a:hover {
     padding: 10px;
     color: white;
 }
+
+.nav-home {
+    border-right: none;
+}
+
+.nav-logout {
+    float: right
+}
+
+.nav-edit-profile {
+    float: right;
+    border-left: 1px solid white;
+}
+
+.nav-login {
+    float: right;
+    border-left: 1px solid white;
+}
+
 
 /* General Styling */
 #body-fit {
@@ -110,10 +134,11 @@ li a:hover {
 }
 
 /* Profile Styling */
-.profile-body {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-}
+    .profile-body {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
 
 .profile-page-title {
     grid-column: 1 / span 3;
@@ -146,8 +171,6 @@ li a:hover {
     flex-direction: column;
     height: fit-content;
     width: fit-content;
-    max-width: 100%;
-    min-width: 20%;
 }
 
 .journal-entry-container {
@@ -446,4 +469,35 @@ li a:hover {
     transform: rotate(180deg);
     top: 10px;
     right: 2.5px;
+}
+
+/* Mobile Styling */
+@media only screen and (max-width: 768px) {
+    body {
+        display: none;
+    }
+
+    nav {
+        display: none;
+    }
+
+    #body-fit {
+        background-color: red;
+    }
+
+    .profile-body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hydration-tracker-container {
+        display: none;
+        width: 100%;
+    }
+
+    .daily-goals-widget {
+        display: none;
+        width: 100%;
+    }
 }

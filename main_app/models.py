@@ -65,3 +65,4 @@ class HydrationTracker(models.Model):
     
     class Meta:
         ordering = ['-date_of_intake']
+        
