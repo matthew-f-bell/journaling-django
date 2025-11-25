@@ -17,45 +17,45 @@
         {% block title %}
         {% endblock %}
     </title>
-    {% block additional-head %}
+    {% block extra_head %}
     {% endblock %}
 </head>
 <body>
     <nav>
-        <ul>
-            <li>
+        <ul id="nav-list">
+            <li class="nav-item">
                 <a class="nav-link" id="home-btn" href="/">
                     Home
                 </a>
             </li>
             {% if user.is_authenticated %}
-            <li>
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'user-profile' user.id %}">
                     {{user.first_name}}
                 </a>
             </li>
-            <li id="nav-goals">
+            <li class="nav-item" id="nav-goals">
                 <a class="nav-link" href="{% url 'daily-goals-list' user.id %}">
                     Goals
                 </a>
             </li>
-            <li id="nav-hydration">
+            <li class="nav-item" id="nav-hydration">
                 <a class="nav-link" href="{% url 'hydration-tracker' user.id %}">
                     Hydration
                 </a>
             </li>
-            <li id="nav-logout">
+            <li class="nav-item" id="nav-logout">
                 <a class="nav-link"  href="{% url 'account_logout' %}">
                     Logout
                 </a>
             </li>
-            <li id="nav-edit-profile">
+            <li class="nav-item" id="nav-edit-profile">
                 <a class="nav-link" href="{% url 'user-update' user.id %}">
                     Edit Profile
                 </a>
             </li>
             {% else %}
-            <li id="nav-login">
+            <li class="nav-item" id="nav-login">
                 <a class="nav-link" href="{% url 'account_login' %}">
                     Login/Sign-Up
                 </a>

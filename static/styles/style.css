@@ -6,10 +6,7 @@ nav {
     left: 0;
 }
 
-
-
-
-ul {
+#nav-list {
     top: 0;
     left: 0;
     background-color: #015582;
@@ -24,13 +21,13 @@ ul {
     border-right: none;
 }
 
-li {
+.nav-item {
     float: left;
     background-color: #015582;
     border-right: 1px solid white;
 }
 
-li a:hover {
+.nav-item a:hover {
     background-color: #5496ba;
 }
 
@@ -59,6 +56,13 @@ li a:hover {
     border-left: 1px solid white;
 }
 
+#nav-goals {
+    display: none;
+}
+
+#nav-hydration {
+    display: none;
+}
 
 /* General Styling */
 #body-fit {
@@ -499,5 +503,13 @@ li a:hover {
     .daily-goals-widget {
         display: none;
         width: 100%;
+    }
+
+    #nav-goals {
+        display: list-item;
+    }
+
+    #nav-goals {
+        display: list-item;
     }
 }
