@@ -1,10 +1,121 @@
+/* Google AllAuth Login */
+.gsi-material-button {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-appearance: none;
+    background-color: WHITE;
+    background-image: none;
+    border: 1px solid #747775;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    cursor: pointer;
+    font-family: 'Roboto', arial, sans-serif;
+    font-size: 14px;
+    height: 40px;
+    letter-spacing: 0.25px;
+    outline: none;
+    overflow: hidden;
+    padding: 0 12px;
+    position: relative;
+    text-align: center;
+    -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+    transition: background-color .218s, border-color .218s, box-shadow .218s;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+    max-width: 400px;
+    min-width: min-content;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+    height: 20px;
+    margin-right: 12px;
+    min-width: 20px;
+    width: 20px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+    -webkit-align-items: center;
+    align-items: center;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    height: 100%;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    font-family: 'Roboto', arial, sans-serif;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.gsi-material-button .gsi-material-button-state {
+    -webkit-transition: opacity .218s;
+    transition: opacity .218s;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.gsi-material-button:disabled {
+    cursor: default;
+    background-color: #ffffff61;
+    border-color: #1f1f1f1f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-contents {
+    opacity: 38%;
+}
+
+.gsi-material-button:disabled .gsi-material-button-icon {
+    opacity: 38%;
+}
+
+.gsi-material-button:not(:disabled):active .gsi-material-button-state, 
+.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+    background-color: #303030;
+    opacity: 12%;
+}
+
+.gsi-material-button:not(:disabled):hover {
+    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
+.gsi-material-button:not(:disabled):hover .gsi-material-button-state {
+    background-color: #303030;
+    opacity: 8%;
+}
+
+#allauth-body {
+    margin-top: 48px;
+}
+
+
+
 /* Navbar */
 nav {
     top: 0;
     left: 0;
 }
 
-ul {
+#nav-list {
     top: 0;
     left: 0;
     background-color: #015582;
@@ -19,13 +130,13 @@ ul {
     border-right: none;
 }
 
-li {
+.nav-item {
     float: left;
     background-color: #015582;
     border-right: 1px solid white;
 }
 
-li a:hover {
+.nav-item a:hover {
     background-color: #5496ba;
 }
 
@@ -35,6 +146,30 @@ li a:hover {
     padding: 10px;
     color: white;
 }
+
+#nav-logout {
+    float: right
+}
+
+#nav-edit-profile {
+    float: right;
+    border-left: 1px solid white;
+}
+
+#nav-login {
+    float: right;
+    border-left: 1px solid white;
+}
+
+#nav-goals {
+    display: none;
+}
+
+#nav-hydration {
+    display: none;
+}
+
+
 
 /* General Styling */
 #body-fit {
@@ -110,10 +245,11 @@ li a:hover {
 }
 
 /* Profile Styling */
-.profile-body {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-}
+    .profile-body {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
 
 .profile-page-title {
     grid-column: 1 / span 3;
@@ -146,8 +282,6 @@ li a:hover {
     flex-direction: column;
     height: fit-content;
     width: fit-content;
-    max-width: 100%;
-    min-width: 20%;
 }
 
 .journal-entry-container {
@@ -214,6 +348,15 @@ li a:hover {
 /* Daily Goals Styling */
 .daily-goals-widget {
     max-width: 1fr;
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.mobile-daily-goals-widget {
     width: fit-content;
     height: fit-content;
     border: 2px solid black;
@@ -302,6 +445,14 @@ li a:hover {
     padding:10px;
     width: 1fr;
     max-width: 1fr;
+}
+
+.mobile-hydration-tracker {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding:10px;
+    width: fit-content;
+    max-width: 100%;
 }
 
 .hydration-tracker-title {
@@ -446,4 +597,31 @@ li a:hover {
     transform: rotate(180deg);
     top: 10px;
     right: 2.5px;
+}
+
+/* Mobile Styling */
+@media only screen and (max-width: 768px) {
+    .profile-body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hydration-tracker-container {
+        display: none;
+        width: 100%;
+    }
+
+    .daily-goals-widget {
+        display: none;
+        width: 100%;
+    }
+
+    #nav-goals {
+        display: list-item;
+    }
+
+    #nav-hydration {
+        display: list-item;
+    }
 }

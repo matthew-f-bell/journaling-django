@@ -1,0 +1,70 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <base href="{% static '/' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}" />
+        <script src="{% static 'scripts/app.js' %}" defer></script>
+        <title>
+            {% block head_title %}
+            {% endblock head_title %}
+        </title>
+        {% block extra_head %}
+        {% endblock extra_head %}
+    </head>
+    <body>
+        <nav>
+            <ul id="nav-list">
+                <li class="nav-item">
+                    <a class="nav-link" id="home-btn" href="/">
+                        Home
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-profile' user.id %}">
+                        {{user.first_name}}
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-goals">
+                    <a class="nav-link" href="{% url 'daily-goals-list' user.id %}">
+                        Goals
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-hydration">
+                    <a class="nav-link" href="{% url 'hydration-tracker' user.id %}">
+                        Hydration
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-logout">
+                    <a class="nav-link"  href="{% url 'account_logout' %}">
+                        Logout
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-edit-profile">
+                    <a class="nav-link" href="{% url 'user-update' user.id %}">
+                        Edit Profile
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item" id="nav-login">
+                    <a class="nav-link" href="{% url 'account_login' %}">
+                        Login/Sign-Up
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div id="allauth-body">
+            {% block body %}
+                {% block content %}
+                {% endblock content %}
+            {% endblock body %}
+            {% block extra_body %}
+            {% endblock extra_body %}
+        </div>
+    </body>
+</html>

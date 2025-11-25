@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tz %}
+
+<!-- Tab Title -->
+{% block title %}
+    Hydration Tracker | Better Days Coming
+{% endblock %}
+
+<!-- Body Content -->
+{% block body %}
+    <div class="mobile-hydration-tracker">
+        <h4 class="hydration-tracker-title">
+            Daily Hydration:
+        </h4>
+        <form method="POST" class="hydration-form">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit">Submit</button>
+        </form>
+        <div class="hydration-date-container">
+            {% for hydration_tracker in hydration_trackers %}
+                {% if hydration_tracker.water_intake == 0 %}
+                    <div class="water-block" id="no-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
+                {% elif hydration_tracker.water_intake >= 1 and 25 >= hydration_tracker.water_intake %}
+                    <div class="water-block" id="lightest-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
+                {% elif hydration_tracker.water_intake >= 26 and 50 >= hydration_tracker.water_intake %}
+                    <div class="water-block" id="light-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
+                {% elif hydration_tracker.water_intake >= 51 and 75 >= hydration_tracker.water_intake %}
+                    <div class="water-block" id="average-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
+                {% elif hydration_tracker.water_intake >= 76 and 100 >= hydration_tracker.water_intake %}
+                    <div class="water-block" id="heavy-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
+                {% elif hydration_tracker.water_intake >= 101 and 127 >= hydration_tracker.water_intake %}
+                    <div class="water-block" id="heaviest-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> </div>
+                {% elif hydration_tracker.water_intake >= 128 %}
+                    <div class="water-block" id="perfect-water" title="Date: {{ hydration_tracker.date_of_intake }}, Drank: {{ hydration_tracker.water_intake }} oz of water"> 
+                        <div class="star-container">
+                            <div class="corner" id="corner-1"></div>
+                            <div class="corner" id="corner-2"></div>
+                            <div class="corner" id="corner-3"></div>
+                            <div class="corner" id="corner-4"></div>
+                            <div class="corner" id="corner-5"></div>
+
+                            <div class="inner-corner" id="inner-corner-1"></div>
+                            <div class="inner-corner" id="inner-corner-2"></div>
+                            <div class="inner-corner" id="inner-corner-3"></div>
+                            <div class="inner-corner" id="inner-corner-4"></div>
+                            <div class="inner-corner" id="inner-corner-5"></div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

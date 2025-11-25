@@ -252,3 +252,81 @@ class Daily_Goals_Update_View(FormView):
     def get_success_url(self):
         user_id = self.request.user.id
         return reverse_lazy('daily-goals-checklist', kwargs={'user_id':user_id})
+
+@method_decorator(login_required, name='dispatch')
+class Hydration_Tracker_View(TemplateView, FormMixin):
+    model = CustomUser
+    form_class = HydrationTrackerForm
+    template_name = 'hydration_tracker.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user.id
+        get_datetime = timezone.localtime()
+        get_date = get_datetime.date()
+
+        if HydrationTracker.objects.filter(user=user).exists() == False:
+            one_year_of_hydration_null = get_date - timedelta(days=365)
+            while one_year_of_hydration_null <= get_date:
+                HydrationTracker.objects.create(user=self.request.user, date_of_intake=one_year_of_hydration_null, water_intake=0)
+                one_year_of_hydration_null = one_year_of_hydration_null + timedelta(days=1)
+        elif HydrationTracker.objects.filter(user=user).latest('date_of_intake').date_of_intake + timedelta(days=1) < get_date:
+            hydration_catch_up = HydrationTracker.objects.filter(user=user).latest('date_of_intake').date_of_intake
+            while hydration_catch_up < get_date:
+                HydrationTracker.objects.create(user=self.request.user, date_of_intake=hydration_catch_up, water_intake=0)
+                hydration_catch_up = hydration_catch_up + timedelta(days=1)
+        elif HydrationTracker.objects.filter(user=user).filter(date_of_intake=get_date).exists() == False:
+                HydrationTracker.objects.create(user=self.request.user, date_of_intake=get_date, water_intake=0)
+        else:
+            print("Did nothing")
+
+        context['hydration_form'] = self.get_form()
+        context['hydration_trackers'] = HydrationTracker.objects.filter(user=user)
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form = HydrationTrackerForm(request.POST)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        user_id = self.object.user.id
+        intake_of_water = self.request.POST.getlist("water_intake")
+        get_datetime = timezone.localtime()
+        get_date = get_datetime.date()
+        if '8' in intake_of_water:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+            hydration_day.save()
+        elif '16' in intake_of_water:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+            hydration_day.save()
+        elif '32' in intake_of_water:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            hydration_day.water_intake = hydration_day.water_intake + int(intake_of_water[0])
+            hydration_day.save()
+        else:
+            hydration_day = HydrationTracker.objects.get(date_of_intake=get_date)
+            print("*_*_*_*_*_*_*_* Not a valid submission!!!!!! *_*_*_*_*_*_*_*")
+            print(hydration_day)
+        return HttpResponseRedirect(reverse_lazy('user-profile', kwargs={'user_id':user_id}))
+    
+    def get_success_url(self):
+        user_id = self.request.user.id
+        return reverse_lazy('user-profile', kwargs={'user_id':user_id})
+    
+@method_decorator(login_required, name='dispatch')
+class Daily_Goals_List_View(TemplateView):
+    model = CustomUser
+    template_name = 'daily_goals_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user.id
+        context['daily_goals'] = DailyGoals.objects.filter(user=user)
+        return context
