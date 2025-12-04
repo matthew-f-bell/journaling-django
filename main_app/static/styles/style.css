@@ -155,6 +155,8 @@ nav {
 .dropdown-choices {
     display: none;
     background-color: #015582;
+    float: left;
+    min-width: fit-content;
     position: absolute;
     z-index: 1;
 }
