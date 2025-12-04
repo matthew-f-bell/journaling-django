@@ -147,6 +147,10 @@ nav {
     color: white;
 }
 
+#dropdown-settings {
+    float: right
+}
+
 #nav-logout {
     float: right
 }

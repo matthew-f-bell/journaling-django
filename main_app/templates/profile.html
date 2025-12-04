@@ -11,7 +11,7 @@
 {% block body %}
     <div class="profile-body">
         <h1 class="profile-page-title">
-            Welcome, {{ user.username }} to your Journal!
+            Welcome, {{ user.first_name }} to your Journal!
         </h1>
         <a class="create-btn" id="profile-btn" href="{% url 'journal-entry' %}">
                 New Journal Entry
