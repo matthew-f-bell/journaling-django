@@ -2,8 +2,6 @@
 {% load static %}
 {% load tz %}
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,15 +21,16 @@
 <body>
     <nav>
         <ul id="nav-list">
-            <li class="nav-item">
+            {% if user.is_authenticated == False %}
+            <li class="nav-item" >
                 <a class="nav-link" id="home-btn" href="/">
                     Home
                 </a>
             </li>
-            {% if user.is_authenticated %}
+            {% elif user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'user-profile' user.id %}">
-                    {{user.first_name}}
+                    Home
                 </a>
             </li>
             <li class="nav-item" id="nav-goals">
@@ -44,15 +43,18 @@
                     Hydration
                 </a>
             </li>
-            <li class="nav-item" id="nav-logout">
-                <a class="nav-link"  href="{% url 'account_logout' %}">
-                    Logout
+            <li class="nav-item" id="dropdown-settings">
+                <a class="nav-link">
+                    Settings
                 </a>
-            </li>
-            <li class="nav-item" id="nav-edit-profile">
-                <a class="nav-link" href="{% url 'user-update' user.id %}">
-                    Edit Profile
-                </a>
+                <div class="dropdown-choices">
+                    <a class="nav-link" href="{% url 'user-update' user.id %}">
+                        Edit Profile
+                    </a>
+                    <a class="nav-link"  href="{% url 'account_logout' %}">
+                        Logout
+                    </a>
+                </div>
             </li>
             {% else %}
             <li class="nav-item" id="nav-login">

@@ -147,13 +147,26 @@ nav {
     color: white;
 }
 
-#nav-logout {
-    float: right
-}
-
-#nav-edit-profile {
+#nav-edit-profile, #dropdown-settings {
     float: right;
     border-left: 1px solid white;
+}
+
+.dropdown-choices {
+    display: none;
+    background-color: #015582;
+    float: left;
+    min-width: fit-content;
+    position: absolute;
+    z-index: 1;
+}
+
+#dropdown-settings:hover .dropdown-choices {
+    display: list-item;
+}
+
+#nav-logout {
+    float: right
 }
 
 #nav-login {
